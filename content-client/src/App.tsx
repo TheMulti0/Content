@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { NewsService } from "./NewsService";
+import { NewsItem } from "./NewsItem";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface State {
+  items: NewsItem[];
 }
 
-export default App;
+export default class App extends React.Component<any, State> {
+  private newsService: NewsService;
+
+  constructor(props: any) {
+    super(props);
+
+    this.newsService = new NewsService();
+    this.state = { items: [] };
+  }
+
+  async componentDidMount() {
+    const items: NewsItem[] = await this.newsService.getNews();
+    this.setState({ items })
+  }
+
+  render() {
+    return (
+      <div>
+        { this.state.items.map(item => <p>{item.title}</p>) }
+      </div>
+    );
+  }
+}
