@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Mako.Tests.Reporters
 {
-    public class GetLatestNewsTests
+    public class GetNewsTests
     {
         [Fact]
         public async Task Test()
