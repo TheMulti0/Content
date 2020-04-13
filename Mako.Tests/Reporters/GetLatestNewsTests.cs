@@ -40,7 +40,7 @@ namespace Mako.Tests.Reporters
                 {
                     try
                     {
-                        List<NewsItem> newsItems = new ReportersNewsProvider(cancellationToken: cts.Token)
+                        new ReportersNewsProvider(cancellationToken: cts.Token)
                             .Get()
                             .Result
                             .ToList();
