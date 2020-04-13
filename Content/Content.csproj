@@ -4,5 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Content.Api\Content.Api.csproj" />
+    <ProjectReference Include="..\Kan\Kan.csproj" />
+    <ProjectReference Include="..\Mako\Mako.csproj" />
+  </ItemGroup>
+
 
 </Project>
