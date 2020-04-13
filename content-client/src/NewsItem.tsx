@@ -1,31 +1,24 @@
+import './NewsItem.css';
 import React from 'react';
 
-import { Button, Card, CardHeader, CardContent, Typography } from "@material-ui/core";
+import { Card, CardHeader, CardContent, Typography, CardMedia } from "@material-ui/core";
 import { INewsItem } from "./INewsItem";
 
 export default function NewsItem(props: {item: INewsItem}) {
   const { item } = props;
   return (
-    <Card>
+    <Card className="Card" variant="elevation">
       <CardHeader
-        avatar={ <img src={ item.imageUrl } alt="s"/> }
-        title={ item.title }
-        subheader={ item.description }
+        avatar={ <img src={ item.author.imageUrl }  alt="image" /> }
+        title={ item.author.name }
       />
+      <CardMedia image={ item.imageUrl } title="image " />
       <CardContent>
-        <Typography color="textSecondary" gutterBottom>
-          Word of the Day
+        <Typography color="textSecondary">
+          { item.title } | { new Date(item.date).toDateString() }
         </Typography>
         <Typography variant="h5" component="h2">
-          dsa
-        </Typography>
-        <Typography color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+          { item.description }
         </Typography>
       </CardContent>
     </Card>
