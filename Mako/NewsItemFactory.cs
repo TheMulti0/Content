@@ -3,17 +3,18 @@ using System.Linq;
 using Content.Api;
 using Mako.Reporters.Entities;
 
-namespace Mako.Reporters
+namespace Mako
 {
     public static class NewsItemFactory
     {
         private static DateTime _unixEpoch = new DateTime(1970, 1, 1);
 
-        public static NewsItem FromReport(Report message)
+        public static NewsItem Create(Report message)
         {
             return new NewsItem(
-                $"Report by {message.Reporter.Nickname}",
+                "",
                 message.Content,
+                AuthorFactory.Create(message.Reporter), 
                 UnixTime(message.PublishedDate),
                 null,
                 GetImageUrl(message),

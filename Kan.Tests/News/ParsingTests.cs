@@ -39,7 +39,7 @@ namespace Kan.Tests.News
         private static NewsItem TestItemParsing(string fileName)
         {
             HtmlNode newsItemNode = ReadHtml(fileName);
-            NewsItem item = KanNewsItemFactory.Create(newsItemNode);
+            NewsItem item = NewsItemFactory.Create(newsItemNode);
             AssertNewsItem(item);
 
             return item;

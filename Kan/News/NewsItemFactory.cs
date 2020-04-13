@@ -7,16 +7,23 @@ using HtmlAgilityPack;
 
 namespace Kan.News
 {
-    public static class KanNewsItemFactory
+    public static class NewsItemFactory
     {
         public static NewsItem Create(HtmlNode item)
         {
             HtmlNode infoBlock = item.LastElementOrDefault("div");
             HtmlNode contentInfo = infoBlock.FirstOrDefault(node => node.HasClass("program_list_link") && node.HasClass("w-inline-block"));
+            
 
             string title = FindTitle(contentInfo);
             string description = FindDescription(contentInfo);
-            DateTime date = FindDate(infoBlock);
+            
+            HtmlNode additionalInfo = infoBlock
+                .FirstOrDefault(node => node.HasClass("additional_info"));
+            
+            Author author = AuthorFactory.FromAuthor(infoBlock);
+            DateTime date = FindDate(additionalInfo);
+            
             string url = FindUrl(contentInfo);
 
             HtmlNode mediaBlock = item.FirstElementOrDefault("div")?.FirstElementOrDefault("div");
@@ -26,12 +33,13 @@ namespace Kan.News
             return new NewsItem(
                 title,
                 description,
+                author,
                 date,
                 url,
                 imageUrl,
                 videoUrl);
         }
-
+        
         private static string FindTitle(HtmlNode contentInfo)
         {
             HtmlNode title = contentInfo.FirstElementOrDefault("h2");
@@ -44,13 +52,13 @@ namespace Kan.News
             return Decode(description.InnerText);
         }
 
-        private static DateTime FindDate(HtmlNode infoBlock)
+        private static DateTime FindDate(HtmlNode additionalInfo)
         {
-            HtmlNode date = infoBlock
-                .FirstOrDefault(node => node.HasClass("additional_info"))
+            HtmlNode date = additionalInfo
                 .FirstElementOrDefault("div");
 
             string dateText = Decode(date.InnerText);
+            
             return ParseDate(dateText);
         }
         

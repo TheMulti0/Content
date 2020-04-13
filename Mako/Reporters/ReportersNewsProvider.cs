@@ -87,7 +87,7 @@ namespace Mako.Reporters
 
             var messages = await DeserializeJson(content, token);
 
-            return messages.Select(NewsItemFactory.FromReport);
+            return messages.Select(NewsItemFactory.Create);
         }
 
         public static async Task<IEnumerable<Report>> DeserializeJson(Stream content, CancellationToken token)

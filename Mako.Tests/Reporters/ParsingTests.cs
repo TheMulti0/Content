@@ -19,7 +19,7 @@ namespace Mako.Tests.Reporters
         public async Task TestItemsParsing()
         {
             var feed = await DeserializeJson("reporters1.json");
-            IEnumerable<NewsItem> items = feed.Select(NewsItemFactory.FromReport);
+            IEnumerable<NewsItem> items = feed.Select(NewsItemFactory.Create);
             
             foreach (NewsItem item in items)
             {

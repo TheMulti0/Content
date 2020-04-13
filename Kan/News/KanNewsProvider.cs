@@ -94,7 +94,7 @@ namespace Kan.News
                 .FirstElementOrDefault("ol")
                 .ChildNodes
                 .Where(item => item.Name == "li")
-                .Select(KanNewsItemFactory.Create);
+                .Select(NewsItemFactory.Create);
         }
         
     }

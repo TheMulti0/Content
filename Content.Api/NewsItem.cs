@@ -7,6 +7,8 @@ namespace Content.Api
         public string Title { get; }
 
         public string Description { get; }
+        
+        public Author Author { get; }
 
         public DateTime Date { get; }
 
@@ -19,6 +21,7 @@ namespace Content.Api
         public NewsItem(
             string title,
             string description,
+            Author author,
             DateTime date,
             string url,
             string imageUrl,
@@ -26,6 +29,7 @@ namespace Content.Api
         {
             Title = title;
             Description = description;
+            Author = author;
             Date = date;
             Url = url;
             ImageUrl = imageUrl;
