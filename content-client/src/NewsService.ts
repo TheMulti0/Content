@@ -1,9 +1,9 @@
-import { NewsItem } from "./NewsItem";
+import { INewsItem } from "./INewsItem";
 
 export class NewsService {
   private readonly baseUrl = 'http://localhost:5000';
 
-  getNews(): Promise<NewsItem[]> {
+  getNews(): Promise<INewsItem[]> {
     return fetch(`${this.baseUrl}/news`)
       .then(response => response.json())
   }

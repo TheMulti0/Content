@@ -1,4 +1,4 @@
-export interface NewsItem {
+export interface INewsItem {
   title: string;
   description: string;
   date: string;

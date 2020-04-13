@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.css';
 import { NewsService } from "./NewsService";
-import { NewsItem } from "./NewsItem";
+import { INewsItem } from "./INewsItem";
+import NewsItem from "./NewsItem";
 
 interface State {
-  items: NewsItem[];
+  items: INewsItem[];
 }
 
-export default class App extends React.Component<any, State> {
+export default class News extends React.Component<any, State> {
   private newsService: NewsService;
 
   constructor(props: any) {
@@ -18,14 +18,14 @@ export default class App extends React.Component<any, State> {
   }
 
   async componentDidMount() {
-    const items: NewsItem[] = await this.newsService.getNews();
+    const items: INewsItem[] = await this.newsService.getNews();
     this.setState({ items })
   }
 
   render() {
     return (
       <div>
-        { this.state.items.map(item => <p>{item.title}</p>) }
+        { this.state.items.map(item => <NewsItem item={item} />) }
       </div>
     );
   }
