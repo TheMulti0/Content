@@ -3,7 +3,6 @@ img {
     height: 32px;
 }
 
-.Card {
-    width: 800px;
-    height: 400px;
+.card {
+    height: fit-content;
 }

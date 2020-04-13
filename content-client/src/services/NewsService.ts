@@ -1,4 +1,4 @@
-import { INewsItem } from "./INewsItem";
+import { INewsItem } from "../models/INewsItem";
 
 export class NewsService {
   private readonly baseUrl = 'http://localhost:5000';

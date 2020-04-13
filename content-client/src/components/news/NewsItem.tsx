@@ -2,12 +2,12 @@ import './NewsItem.css';
 import React from 'react';
 
 import { Card, CardHeader, CardContent, Typography, CardMedia } from "@material-ui/core";
-import { INewsItem } from "./INewsItem";
+import { INewsItem } from "./models/INewsItem";
 
 export default function NewsItem(props: {item: INewsItem}) {
   const { item } = props;
   return (
-    <Card className="Card"
+    <Card className="card"
           variant="elevation">
 
       <CardHeader

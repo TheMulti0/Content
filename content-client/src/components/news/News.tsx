@@ -1,6 +1,6 @@
 import React from 'react';
-import { NewsService } from "./NewsService";
-import { INewsItem } from "./INewsItem";
+import { NewsService } from "../../services/NewsService";
+import { INewsItem } from "../../models/INewsItem";
 import NewsItem from "./NewsItem";
 
 interface State {
