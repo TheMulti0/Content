@@ -30,9 +30,7 @@ namespace Mako
         {
             var firstMediaInfo = message.MediaInfos.FirstOrDefault();
             
-            return firstMediaInfo == null 
-                ? message.Reporter.Details.Image 
-                : firstMediaInfo.HighResolutionImage;
+            return firstMediaInfo?.HighResolutionImage;
         }
     }
 }
