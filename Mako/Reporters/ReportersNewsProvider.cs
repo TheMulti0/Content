@@ -11,44 +11,35 @@ using Mako.Reporters.Entities;
 
 namespace Mako.Reporters
 {
-    public class ReportersNewsProvider : INewsProvider
+    public class ReportersNewsProvider : IPagedNewsProvider
     {
         private const string BaseAddress = "https://www.mako.co.il";
-        private const int MaxItemsPerPage = 100;
 
-        private readonly int _maxResults;
-        private readonly int _firstPage;
-        private readonly CancellationToken _cancellationToken;
         private readonly HttpClient _client;
 
-        public ReportersNewsProvider(
-            int maxResults = MaxItemsPerPage,
-            int firstPage = 0, // Zero based
-            CancellationToken cancellationToken = default,
-            HttpClient client = null)
+        public ReportersNewsProvider(HttpClient client = null)
         {
-            _maxResults = maxResults; // TODO Handle zero
-            _firstPage = firstPage; // TODO Handle negative
-            _cancellationToken = cancellationToken;
-            
             _client = client ?? new HttpClient();
             _client.BaseAddress = new Uri(BaseAddress);
         }
 
-        public async Task<IEnumerable<NewsItem>> Get()
+        public int MaximumItemsPerPage { get; } = 100;
+
+        public async Task<IEnumerable<NewsItem>> GetNews(
+            int maxResults,
+            int firstPage = 0,
+            CancellationToken cancellationToken = default)
         {
-            int remainingItemsCount = _maxResults;
+            int remainingItemsCount = maxResults;
 
             var totalItems = new List<NewsItem>();
 
-            int firstPage = _firstPage + 1;
-
-            for (int pageIndex = firstPage; remainingItemsCount > 0; pageIndex++)
+            for (int pageIndex = firstPage + 1; remainingItemsCount > 0; pageIndex++)
             {
                 IEnumerable<NewsItem> items = await GetItems(
                     pageIndex,
-                    _cancellationToken);
-                var itemsList = items.ToList();
+                    cancellationToken);
+                List<NewsItem> itemsList = items.ToList();
 
                 int itemsToTakeCount = GetItemsToTakeCount(
                     itemsList.Count,
@@ -57,7 +48,7 @@ namespace Mako.Reporters
                 totalItems.AddRange(itemsList.Take(itemsToTakeCount));
 
                 remainingItemsCount -= itemsToTakeCount;
-                if (itemsList.Count < MaxItemsPerPage) 
+                if (itemsList.Count < MaximumItemsPerPage)
                 {
                     // Meaning there are less than maximum in this page, which means this is for sure the last page
                     // (although the last page can contain 100 elements, in that case the loop will operate again and receive zero items
@@ -79,13 +70,13 @@ namespace Mako.Reporters
             int page,
             CancellationToken token)
         {
-            var response = await _client.GetAsync(
-                $"/AjaxPage?jspName=getDesk12Messages.jsp&count={MaxItemsPerPage}&page={page}",
+            HttpResponseMessage response = await _client.GetAsync(
+                $"/AjaxPage?jspName=getDesk12Messages.jsp&count={MaximumItemsPerPage}&page={page}",
                 token);
 
-            var content = await response.Content.ReadAsStreamAsync();
+            Stream content = await response.Content.ReadAsStreamAsync();
 
-            var messages = await DeserializeJson(content, token);
+            IEnumerable<Report> messages = await DeserializeJson(content, token);
 
             return messages.Select(NewsItemFactory.Create);
         }

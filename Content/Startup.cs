@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Api;
+using Content.Controllers;
 using Kan.News;
 using Mako.Reporters;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,10 @@ namespace Content
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IPagedNewsProvider, ReportersNewsProvider>();
+            services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
+            services.AddSingleton<NewsService>();
             
             services.AddCors(
                 options =>

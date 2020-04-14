@@ -39,8 +39,9 @@ namespace Kan.Tests.News
                 {
                     try
                     {
-                        new KanNewsProvider(cancellationToken: cts.Token)
-                            .Get()
+                        var provider = new KanNewsProvider();
+                        var items = provider
+                            .GetNews(provider.MaximumItemsPerPage, cancellationToken: cts.Token)
                             .Result
                             .ToList();
                     }
@@ -59,7 +60,7 @@ namespace Kan.Tests.News
         
         private async Task _Test(int maxResults)
         {
-            var items = (await new KanNewsProvider(maxResults).Get()).ToList();
+            var items = (await new KanNewsProvider().GetNews(maxResults)).ToList();
 
             Assert.True(items.Count <= maxResults);
         }

@@ -21,7 +21,7 @@ namespace Kan.News
             HtmlNode additionalInfo = infoBlock
                 .FirstOrDefault(node => node.HasClass("additional_info"));
             
-            Author author = AuthorFactory.FromAuthor(infoBlock);
+            Author author = AuthorFactory.FromAuthor(additionalInfo);
             DateTime date = FindDate(additionalInfo);
             
             string url = FindUrl(contentInfo);

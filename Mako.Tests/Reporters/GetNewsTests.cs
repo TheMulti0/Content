@@ -40,8 +40,9 @@ namespace Mako.Tests.Reporters
                 {
                     try
                     {
-                        new ReportersNewsProvider(cancellationToken: cts.Token)
-                            .Get()
+                        var provider = new ReportersNewsProvider();
+                        var items = provider
+                            .GetNews(provider.MaximumItemsPerPage, cancellationToken: cts.Token)
                             .Result
                             .ToList();
                     }
@@ -60,7 +61,7 @@ namespace Mako.Tests.Reporters
         
         private async Task _Test(int maxResults)
         {
-            var items = (await new ReportersNewsProvider(maxResults).Get()).ToList();
+            var items = (await new ReportersNewsProvider().GetNews(maxResults)).ToList();
 
             Assert.True(items.Count <= maxResults);
         }

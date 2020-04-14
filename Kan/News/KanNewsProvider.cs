@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Api;
@@ -11,44 +9,34 @@ using HtmlAgilityPack;
 
 namespace Kan.News
 {
-    public class KanNewsProvider : INewsProvider
+    public class KanNewsProvider : IPagedNewsProvider
     {
         internal const string BaseAddress = "https://www.kan.org.il";
-        private const int MaxItemsPerPage = 9;
 
-        private readonly int _maxResults;
-        private readonly int _firstPage;
-        private readonly CancellationToken _cancellationToken;
         private readonly HttpClient _client;
 
-        public KanNewsProvider(
-            int maxResults = MaxItemsPerPage,
-            int firstPage = 0, // Zero based
-            CancellationToken cancellationToken = default,
-            HttpClient client = null)
+        public KanNewsProvider(HttpClient client = null)
         {
-            _maxResults = maxResults; // TODO Handle zero
-            _firstPage = firstPage; // TODO Handle negative
-            _cancellationToken = cancellationToken;
-            
             _client = client ?? new HttpClient();
             _client.BaseAddress = new Uri(BaseAddress);
-            _client.DefaultRequestHeaders.Add("User-Agent","Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36");
         }
 
-        public async Task<IEnumerable<NewsItem>> Get()
+        public int MaximumItemsPerPage { get; } = 9;
+        
+        public async Task<IEnumerable<NewsItem>> GetNews(
+            int maxResults,
+            int firstPage = 0,
+            CancellationToken cancellationToken = default)
         {
-            int remainingItemsCount = _maxResults;
+            int remainingItemsCount = maxResults;
 
             var totalItems = new List<NewsItem>();
-
-            int firstPage = _firstPage + 1;
             
-            for (int pageIndex = firstPage; remainingItemsCount > 0; pageIndex++)
+            for (int pageIndex = firstPage + 1; remainingItemsCount > 0; pageIndex++)
             {
                 IEnumerable<NewsItem> items = await GetItems(
                     pageIndex,
-                    _cancellationToken);
+                    cancellationToken);
                 var itemsList = items.ToList();
 
                 int itemsToTakeCount = GetItemsToTakeCount(
@@ -58,7 +46,7 @@ namespace Kan.News
                 totalItems.AddRange(itemsList.Take(itemsToTakeCount));
 
                 remainingItemsCount -= itemsToTakeCount;
-                if (itemsList.Count < MaxItemsPerPage) 
+                if (itemsList.Count < MaximumItemsPerPage) 
                 {
                     // Meaning there are less than maximum in this page, which means this is for sure the last page
                     // (although the last page can contain 100 elements, in that case the loop will operate again and receive zero items
@@ -96,6 +84,5 @@ namespace Kan.News
                 .Where(item => item.Name == "li")
                 .Select(NewsItemFactory.Create);
         }
-        
     }
 }
