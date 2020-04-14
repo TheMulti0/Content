@@ -2,6 +2,7 @@ import React from 'react';
 import { NewsService } from "../../services/NewsService";
 import { INewsItem } from "../../models/INewsItem";
 import NewsItem from "./NewsItem";
+import { Grid } from '@material-ui/core';
 
 interface State {
   items: INewsItem[];
@@ -25,11 +26,21 @@ export default class News extends React.Component<any, State> {
   render() {
     return (
       <div>
-        {
-          this.state.items.map(
-            (item, index) => <NewsItem key={index} item={item} />)
-        }
+        <Grid container spacing={2}>
+          {
+            this.state.items.map(GridNewsItem)
+          }
+        </Grid>
+
       </div>
     );
+
+    function GridNewsItem(item: INewsItem, index: number) {
+      return (
+        <Grid item key={index}>
+          <NewsItem item={item}/>
+        </Grid>
+      );
+    }
   }
 }

@@ -52,10 +52,11 @@ export default function NavigationBar(props: Props) {
           {
             mappings
               .map(
-                mapping => {
+                (mapping, index) => {
                   return (
                     <div onClick={event => onClick(mapping)}>
-                      <MenuItem mapping={mapping}
+                      <MenuItem key={index}
+                                mapping={mapping}
                                 otherItemSelected={subjects.get(mapping) as Observable<any>} />
                     </div>
 
