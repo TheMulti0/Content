@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Content.Api;
 
-namespace Content.Controllers
+namespace Content.Services
 {
     public class NewsService
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Content.Api;
 using Content.Controllers;
+using Content.Services;
 using Kan.News;
 using Mako.Reporters;
 using Microsoft.AspNetCore.Builder;

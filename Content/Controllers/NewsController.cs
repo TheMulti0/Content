@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Content.Api;
+using Content.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Content.Controllers
