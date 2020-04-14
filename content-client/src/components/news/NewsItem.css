@@ -11,12 +11,20 @@ img {
 }
 
 .date {
-    padding-left: 10pt;
+    padding-right: 10pt;
     font-size: 0.875rem !important;
 }
 
 .MuiCardHeader-root {
-    padding-bottom: 2pt !important;
+    padding: 5pt !important;
+}
+
+.MuiCardHeader-avatar {
+    margin-right: 5pt !important;
+}
+
+.MuiCardHeader-title {
+    padding-right: 6pt;
 }
 
 .MuiCardContent-root {

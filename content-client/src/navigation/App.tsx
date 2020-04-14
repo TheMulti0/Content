@@ -7,6 +7,7 @@ import { IRouteMapping } from '../models/IRouteMapping';
 import { createMuiTheme, CssBaseline, MuiThemeProvider, Theme, ThemeOptions } from "@material-ui/core";
 import { PaletteOptions } from "@material-ui/core/styles/createPalette";
 import News from "../components/news/News";
+import { heIL } from "@material-ui/core/locale";
 
 interface State {
   themeOptions: ThemeOptions;
@@ -49,6 +50,7 @@ export default class App extends React.Component<any, State> {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline/>
+        <div dir="rtl">
         <BrowserRouter>
 
           <NavigationBar mappings={this.routes}
@@ -68,6 +70,7 @@ export default class App extends React.Component<any, State> {
           </Switch>
 
         </BrowserRouter>
+        </div>
       </MuiThemeProvider>
     );
   }
