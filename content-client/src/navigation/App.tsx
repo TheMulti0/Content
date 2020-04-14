@@ -56,7 +56,6 @@ export default class App extends React.Component<any, State> {
                          toggleDarkMode={this.toggleThemeOptions.bind(this)} />
 
           <Switch>
-            <div>
               <Route
                 exact
                 path={this.defaultRoute.path}
@@ -66,7 +65,6 @@ export default class App extends React.Component<any, State> {
                 this.routes.map((mapping, index) => <ComponentRoute key={index} mapping={mapping} />)
               }
 
-            </div>
           </Switch>
 
         </BrowserRouter>

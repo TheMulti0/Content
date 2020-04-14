@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     height: '64px',
     width: 100,
     // marginRight: '1rem !important',
-    '&:hover, &$focusVisible': {
+    '&:hover, &:focusVisible': {
       zIndex: 1,
       '& $imageButton': {
         backgroundColor: theme.palette.action.hover
@@ -94,7 +94,8 @@ export default function MenuItem(props: Props) {
   const { mapping, otherItemSelected } = props;
 
   const [isSelected, setIsSelected] = React.useState(() => false);
-  props.otherItemSelected.subscribe(value => setIsSelected(false));
+
+  otherItemSelected.subscribe(value => setIsSelected(false));
 
   return (
     <div className={classes.root}>
