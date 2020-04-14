@@ -4,10 +4,10 @@ img {
 }
 
 .card {
-    height: fit-content;
+    width: 250pt;
+    max-width: 600pt;
+
     max-height: 600pt;
-    width: 200pt;
-    max-width: 1000pt;
 }
 
 .date {
