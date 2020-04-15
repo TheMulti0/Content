@@ -17,24 +17,38 @@ namespace Content.Services
 
         public async Task<IEnumerable<NewsItem>> GetNews(
             int maxResults,
-            params NewsProviderType[] providerTypes)
+            NewsProviderType[] includedTypes,
+            NewsProviderType[] excludedTypes)
         {
-            IPagedNewsProvider[] providers = GetCorrectNewsProviders(providerTypes);
+            IPagedNewsProvider[] providers = GetCorrectNewsProviders(
+                includedTypes,
+                excludedTypes);
 
             return await GetNews(maxResults, providers);
         }
 
-        private IPagedNewsProvider[] GetCorrectNewsProviders(NewsProviderType[] providerTypes)
+        private IPagedNewsProvider[] GetCorrectNewsProviders(
+            NewsProviderType[] includedTypes,
+            NewsProviderType[] excludedTypes)
         {
-            if (providerTypes.Any())
+            bool IsIncluded(KeyValuePair<IPagedNewsProvider, NewsProviderType> kv) 
+                => includedTypes.Contains(kv.Value);
+
+            bool IsExcluded(KeyValuePair<IPagedNewsProvider, NewsProviderType> kv) 
+                => !excludedTypes.Contains(kv.Value);
+            
+            if (includedTypes.Any() && excludedTypes.Any())
             {
                 return _pagedNewsProviders
                     .ToDictionary(
                         provider => provider,
                         provider => provider.GetProviderType()) // KeyValuePair<IPagedNewsProvider, NewsProviderType?>
-                    .Where(kv => kv.Value != null)
-                    .Where(
-                        kv => providerTypes.Contains( (NewsProviderType) kv.Value ))
+                    .Where(kv => kv.Value != null) // Filter out the nullable instances
+                    .ToDictionary(
+                        kv => kv.Key,
+                        kv => (NewsProviderType) kv.Value) // Will not throw an exception, since the nullable instances have been filtered out
+                    .Where(IsIncluded)
+                    .Where(IsExcluded)
                     .Select(kv => kv.Key)
                     .ToArray();
             }
