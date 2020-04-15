@@ -9,7 +9,7 @@ namespace Mako.News
         {
             return new Author(
                 "החדשות 12",
-                null);
+                "https://rcs.mako.co.il/images/svg/news/logo-n-12.svg");
         } 
     }
 }
