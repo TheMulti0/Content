@@ -19,9 +19,11 @@ namespace Content.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<NewsItem>> Get([FromQuery] NewsProviderType[] providerTypes)
+        public Task<IEnumerable<NewsItem>> Get(
+            [FromQuery] int maxResults,
+            [FromQuery] NewsProviderType[] providerTypes)
         {
-            return _news.GetNews(30, providerTypes);
+            return _news.GetNews(maxResults, providerTypes);
         }
     }
 }
