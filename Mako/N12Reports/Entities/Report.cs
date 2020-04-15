@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Mako.Reporters.Entities
+namespace Mako.N12Reports.Entities
 {
     public class Report
     {

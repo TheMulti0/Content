@@ -1,8 +1,8 @@
 ﻿using Content.Api;
 using Content.Models;
 using Kan.News;
+using Mako.N12Reports;
 using Mako.News;
-using Mako.Reporters;
 
 namespace Content.Services
 {
@@ -23,7 +23,7 @@ namespace Content.Services
         {
             switch (provider)
             {
-                case ReportersNewsProvider _:
+                case N12ReportsProvider _:
                     return NewsProviderType.MakoReporters;
                 
                 case KanNewsProvider _:

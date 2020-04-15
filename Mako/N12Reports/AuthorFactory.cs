@@ -1,7 +1,7 @@
 using Content.Api;
-using Mako.Reporters.Entities;
+using Mako.N12Reports.Entities;
 
-namespace Mako.Reporters
+namespace Mako.N12Reports
 {
     public static class AuthorFactory
     {

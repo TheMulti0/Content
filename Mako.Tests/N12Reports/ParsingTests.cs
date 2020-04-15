@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Api;
-using Mako.Reporters;
-using Mako.Reporters.Entities;
+using Mako.N12Reports;
+using Mako.N12Reports.Entities;
 using Xunit;
 
-namespace Mako.Tests.Reporters
+namespace Mako.Tests.N12Reports
 {
     public class ParsingTests
     {
@@ -29,7 +29,7 @@ namespace Mako.Tests.Reporters
 
         private static Task<IEnumerable<Report>> DeserializeJson(string fileName)
         {
-            return ReportersNewsProvider.DeserializeJson(ReadJson(fileName), CancellationToken.None);
+            return N12ReportsProvider.DeserializeJson(ReadJson(fileName), CancellationToken.None);
         }
 
         private static FileStream ReadJson(string fileName)

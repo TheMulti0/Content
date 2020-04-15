@@ -6,8 +6,8 @@ using Content.Api;
 using Content.Controllers;
 using Content.Services;
 using Kan.News;
+using Mako.N12Reports;
 using Mako.News;
-using Mako.Reporters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,7 +35,7 @@ namespace Content
 
             services.AddSingleton<ILatestNewsProvider, MakoProvider>();
             
-            services.AddSingleton<IPagedNewsProvider, ReportersNewsProvider>();
+            services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
             services.AddSingleton<NewsService>();
             

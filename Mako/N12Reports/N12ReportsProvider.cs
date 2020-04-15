@@ -8,17 +8,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Api;
 using Extensions;
-using Mako.Reporters.Entities;
+using Mako.N12Reports.Entities;
 
-namespace Mako.Reporters
+namespace Mako.N12Reports
 {
-    public class ReportersNewsProvider : IPagedNewsProvider
+    public class N12ReportsProvider : IPagedNewsProvider
     {
         private const string BaseAddress = "https://www.mako.co.il";
 
         private readonly HttpClient _client;
 
-        public ReportersNewsProvider(HttpClient client = null)
+        public N12ReportsProvider(HttpClient client = null)
         {
             _client = client ?? new HttpClient();
             _client.BaseAddress = new Uri(BaseAddress);

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Api;
-using Mako.Reporters;
+using Mako.N12Reports;
 using Xunit;
 
-namespace Mako.Tests.Reporters
+namespace Mako.Tests.N12Reports
 {
     public class GetNewsTests
     {
@@ -40,7 +39,7 @@ namespace Mako.Tests.Reporters
                 {
                     try
                     {
-                        var provider = new ReportersNewsProvider();
+                        var provider = new N12ReportsProvider();
                         var items = provider
                             .GetNews(provider.MaximumItemsPerPage, cancellationToken: cts.Token)
                             .Result
@@ -61,7 +60,7 @@ namespace Mako.Tests.Reporters
         
         private async Task _Test(int maxResults)
         {
-            var items = (await new ReportersNewsProvider().GetNews(maxResults)).ToList();
+            var items = (await new N12ReportsProvider().GetNews(maxResults)).ToList();
 
             Assert.True(items.Count <= maxResults);
         }
