@@ -8,10 +8,14 @@ namespace Content.Services
 {
     public class NewsService
     {
+        private readonly ILatestNewsProvider[] _latestNewsProviders;
         private readonly IPagedNewsProvider[] _pagedNewsProviders;
 
-        public NewsService(IEnumerable<IPagedNewsProvider> pagedNewsProviders)
+        public NewsService(
+            IEnumerable<ILatestNewsProvider> latestNewsProviders,
+            IEnumerable<IPagedNewsProvider> pagedNewsProviders)
         {
+            _latestNewsProviders = latestNewsProviders.ToArray();
             _pagedNewsProviders = pagedNewsProviders.ToArray();
         }
 
@@ -19,13 +23,36 @@ namespace Content.Services
             int maxResults,
             NewsProviderType[] excludedTypes)
         {
-            IPagedNewsProvider[] providers = GetCorrectNewsProviders(
-                excludedTypes);
+            ILatestNewsProvider[] latestProviders = GetCorrectLatestProviders(excludedTypes);
+            IPagedNewsProvider[] pagedProviders = GetCorrectPagedProviders(excludedTypes);
 
-            return await GetNews(maxResults, providers);
+            return await GetNews(maxResults, latestProviders, pagedProviders);
         }
 
-        private IPagedNewsProvider[] GetCorrectNewsProviders(
+        private ILatestNewsProvider[] GetCorrectLatestProviders(
+            NewsProviderType[] excludedTypes)
+        {
+            bool IsExcluded(KeyValuePair<ILatestNewsProvider, NewsProviderType> kv) 
+                => !excludedTypes.Contains(kv.Value);
+            
+            if (excludedTypes.Any())
+            {
+                return _latestNewsProviders
+                    .ToDictionary(
+                        provider => provider,
+                        provider => provider.GetProviderType()) // KeyValuePair<IPagedNewsProvider, NewsProviderType?>
+                    .Where(kv => kv.Value != null) // Filter out the nullable instances
+                    .ToDictionary(
+                        kv => kv.Key,
+                        kv => (NewsProviderType) kv.Value) // Will not throw an exception, since the nullable instances have been filtered out
+                    .Where(IsExcluded)
+                    .Select(kv => kv.Key)
+                    .ToArray();
+            }
+            return _latestNewsProviders;
+        }
+        
+        private IPagedNewsProvider[] GetCorrectPagedProviders(
             NewsProviderType[] excludedTypes)
         {
             bool IsExcluded(KeyValuePair<IPagedNewsProvider, NewsProviderType> kv) 
@@ -50,16 +77,25 @@ namespace Content.Services
 
         private static async Task<IEnumerable<NewsItem>> GetNews(
             int maxResults,
-            IReadOnlyCollection<IPagedNewsProvider> newsProviders)
+            IReadOnlyCollection<ILatestNewsProvider> latestProviders,
+            IReadOnlyCollection<IPagedNewsProvider> pagedProviders)
         {
-            int providersCount = newsProviders.Count;
+            int providersCount = latestProviders.Count + pagedProviders.Count;
             int itemsPerProvider = maxResults / providersCount;
             int stub = maxResults % providersCount;
 
             List<NewsItem> items = new List<NewsItem>();
 
             int index = 0;
-            foreach (IPagedNewsProvider provider in newsProviders)
+            foreach (ILatestNewsProvider provider in latestProviders)
+            {
+                IEnumerable<NewsItem> result = await provider.GetNews();
+                items.AddRange(result.Take(itemsPerProvider));
+                
+                index++;
+            }
+            
+            foreach (IPagedNewsProvider provider in pagedProviders)
             {
                 int requestedItemsCount = itemsPerProvider;
                 if (index + 1 == providersCount) // This is the last iteration

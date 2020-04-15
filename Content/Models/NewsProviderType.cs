@@ -2,6 +2,7 @@
 {
     public enum NewsProviderType
     {
+        Mako,
         MakoReporters,
         KanNews
     }

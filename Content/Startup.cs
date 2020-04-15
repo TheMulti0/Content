@@ -6,6 +6,7 @@ using Content.Api;
 using Content.Controllers;
 using Content.Services;
 using Kan.News;
+using Mako.News;
 using Mako.Reporters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace Content
         {
             services.AddControllers();
 
+            services.AddSingleton<ILatestNewsProvider, MakoProvider>();
+            
             services.AddSingleton<IPagedNewsProvider, ReportersNewsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
             services.AddSingleton<NewsService>();

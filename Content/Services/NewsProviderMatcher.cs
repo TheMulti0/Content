@@ -1,12 +1,24 @@
 ﻿using Content.Api;
 using Content.Models;
 using Kan.News;
+using Mako.News;
 using Mako.Reporters;
 
 namespace Content.Services
 {
     public static class NewsProviderMatcher
     {
+        public static NewsProviderType? GetProviderType(this ILatestNewsProvider provider)
+        {
+            switch (provider)
+            {
+                case MakoProvider _:
+                    return NewsProviderType.Mako;
+                
+                default:
+                    return null;
+            }
+        }
         public static NewsProviderType? GetProviderType(this IPagedNewsProvider provider)
         {
             switch (provider)

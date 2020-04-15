@@ -1,7 +1,7 @@
 using Content.Api;
 using Mako.Reporters.Entities;
 
-namespace Mako
+namespace Mako.Reporters
 {
     public static class AuthorFactory
     {
