@@ -17,27 +17,21 @@ namespace Content.Services
 
         public async Task<IEnumerable<NewsItem>> GetNews(
             int maxResults,
-            NewsProviderType[] includedTypes,
             NewsProviderType[] excludedTypes)
         {
             IPagedNewsProvider[] providers = GetCorrectNewsProviders(
-                includedTypes,
                 excludedTypes);
 
             return await GetNews(maxResults, providers);
         }
 
         private IPagedNewsProvider[] GetCorrectNewsProviders(
-            NewsProviderType[] includedTypes,
             NewsProviderType[] excludedTypes)
         {
-            bool IsIncluded(KeyValuePair<IPagedNewsProvider, NewsProviderType> kv) 
-                => includedTypes.Contains(kv.Value);
-
             bool IsExcluded(KeyValuePair<IPagedNewsProvider, NewsProviderType> kv) 
                 => !excludedTypes.Contains(kv.Value);
             
-            if (includedTypes.Any() && excludedTypes.Any())
+            if (excludedTypes.Any())
             {
                 return _pagedNewsProviders
                     .ToDictionary(
@@ -47,7 +41,6 @@ namespace Content.Services
                     .ToDictionary(
                         kv => kv.Key,
                         kv => (NewsProviderType) kv.Value) // Will not throw an exception, since the nullable instances have been filtered out
-                    .Where(IsIncluded)
                     .Where(IsExcluded)
                     .Select(kv => kv.Key)
                     .ToArray();

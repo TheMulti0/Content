@@ -21,12 +21,10 @@ namespace Content.Controllers
         [HttpGet]
         public Task<IEnumerable<NewsItem>> Get(
             [FromQuery] int maxResults,
-            [FromQuery] NewsProviderType[] includedTypes,
             [FromQuery] NewsProviderType[] excludedTypes)
         {
             return _news.GetNews(
                 maxResults,
-                includedTypes,
                 excludedTypes);
         }
     }
