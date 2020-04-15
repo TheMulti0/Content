@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Content.Api;
+using Content.Models;
 using Content.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +19,9 @@ namespace Content.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<NewsItem>> Get()
+        public Task<IEnumerable<NewsItem>> Get([FromQuery] NewsProviderType[] providerTypes)
         {
-            return _news.GetNews(30);
+            return _news.GetNews(30, providerTypes);
         }
     }
 }
