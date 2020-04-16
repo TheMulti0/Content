@@ -11,5 +11,9 @@
     <ProjectReference Include="..\Mako\Mako.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Interactive.Async" Version="4.1.1" />
+  </ItemGroup>
+
 
 </Project>
