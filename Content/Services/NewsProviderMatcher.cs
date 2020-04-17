@@ -1,5 +1,4 @@
 ﻿using Content.Api;
-using Content.Models;
 using Kan.News;
 using Mako.N12Reports;
 using Mako.News;

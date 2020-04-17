@@ -31,6 +31,7 @@ namespace Kan.News
             string videoUrl = FindVideoUrl(mediaBlock);
 
             return new NewsItem(
+                NewsProviderType.KanNews,
                 title,
                 description,
                 author,

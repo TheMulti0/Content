@@ -17,6 +17,7 @@ namespace Mako.News
                 CultureInfo.InvariantCulture);
             
             return new NewsItem(
+                NewsProviderType.Mako,
                 rssItem.Title,
                 rssItem.ShortDescription,
                 AuthorFactory.Create(rssItem),

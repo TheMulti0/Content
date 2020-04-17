@@ -4,6 +4,8 @@ namespace Content.Api
 {
     public class NewsItem
     {
+        public NewsProviderType Source { get; }
+        
         public string Title { get; }
 
         public string Description { get; }
@@ -19,6 +21,7 @@ namespace Content.Api
         public string VideoUrl { get; }
 
         public NewsItem(
+            NewsProviderType source,
             string title,
             string description,
             Author author,
@@ -34,6 +37,7 @@ namespace Content.Api
             Url = url;
             ImageUrl = imageUrl;
             VideoUrl = videoUrl;
+            Source = source;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Content.Models
+﻿namespace Content.Api
 {
     public enum NewsProviderType
     {
