@@ -12,7 +12,7 @@ namespace Mako.N12Reports
         public static NewsItem Create(Report message)
         {
             return new NewsItem(
-                NewsProviderType.MakoReporters,
+                NewsSource.MakoReporters,
                 "",
                 message.Content,
                 AuthorFactory.Create(message.Reporter), 

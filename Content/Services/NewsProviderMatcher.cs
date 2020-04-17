@@ -7,26 +7,26 @@ namespace Content.Services
 {
     public static class NewsProviderMatcher
     {
-        public static NewsProviderType? GetProviderType(this ILatestNewsProvider provider)
+        public static NewsSource? GetProviderType(this ILatestNewsProvider provider)
         {
             switch (provider)
             {
                 case MakoProvider _:
-                    return NewsProviderType.Mako;
+                    return NewsSource.Mako;
                 
                 default:
                     return null;
             }
         }
-        public static NewsProviderType? GetProviderType(this IPagedNewsProvider provider)
+        public static NewsSource? GetProviderType(this IPagedNewsProvider provider)
         {
             switch (provider)
             {
                 case N12ReportsProvider _:
-                    return NewsProviderType.MakoReporters;
+                    return NewsSource.MakoReporters;
                 
                 case KanNewsProvider _:
-                    return NewsProviderType.KanNews;
+                    return NewsSource.KanNews;
                 
                 default:
                     return null;

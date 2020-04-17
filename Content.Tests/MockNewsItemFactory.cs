@@ -8,7 +8,7 @@ namespace Content.Tests
         public static NewsItem Create()
         {
             return new NewsItem(
-                NewsProviderType.Mako, // Source is only relevant for the client 
+                NewsSource.Mako, // Source is only relevant for the client 
                 "Mock newsitem",
                 "This is for tests only",
                 MockAuthorFactory.Create(),

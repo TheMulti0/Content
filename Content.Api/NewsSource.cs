@@ -1,6 +1,6 @@
 ﻿namespace Content.Api
 {
-    public enum NewsProviderType
+    public enum NewsSource
     {
         Mako,
         MakoReporters,

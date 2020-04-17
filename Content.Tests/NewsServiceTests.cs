@@ -20,7 +20,7 @@ namespace Content.Tests
                 new[] { paged });
 
             var maxResults = 20;
-            IEnumerable<NewsItem> items = await newsService.GetNews(maxResults, new NewsProviderType[0]);
+            IEnumerable<NewsItem> items = await newsService.GetNews(maxResults, new NewsSource[0]);
             Assert.Equal(maxResults, items.Count());
         }
         
@@ -35,7 +35,7 @@ namespace Content.Tests
                 new[] { paged });
 
             var maxResults = 33;
-            IEnumerable<NewsItem> items = await newsService.GetNews(maxResults, new NewsProviderType[0]);
+            IEnumerable<NewsItem> items = await newsService.GetNews(maxResults, new NewsSource[0]);
             Assert.Equal(maxResults, items.Count());
         }
     }
