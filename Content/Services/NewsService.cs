@@ -85,7 +85,9 @@ namespace Content.Services
                 latestNewsList.Count,
                 pagedProviders);
 
-            return latestNewsList.Concat(pagedNews);
+            return latestNewsList
+                .Concat(pagedNews)
+                .OrderByDescending(item => item.Date);
         }
 
         private static ValueTask<IEnumerable<NewsItem>> GetLatestNews(
