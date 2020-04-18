@@ -13,8 +13,8 @@ namespace Mako.N12Reports
         {
             return new NewsItem(
                 NewsSource.MakoReporters,
-                "",
                 message.Content,
+                "",
                 AuthorFactory.Create(message.Reporter), 
                 UnixTime(message.PublishedDate),
                 null,
