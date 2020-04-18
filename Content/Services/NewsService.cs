@@ -77,8 +77,9 @@ namespace Content.Services
             {
                 return new List<NewsItem>();
             }
-            
-            int resultsPerLatestProvider = maxResults / providersCount; // TODO Make latestproviders handle stub too
+            int perProvider = maxResults / providersCount;
+            int stubForAll = maxResults % providersCount;
+            int resultsPerLatestProvider = perProvider + stubForAll / providersCount; // TODO Make latestproviders handle stub too
 
             List<NewsItem> latestNewsList;
             if (latestProvidersCount > 0)
