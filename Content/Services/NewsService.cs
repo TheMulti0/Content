@@ -69,20 +69,42 @@ namespace Content.Services
             IReadOnlyCollection<ILatestNewsProvider> latestProviders,
             IReadOnlyCollection<IPagedNewsProvider> pagedProviders)
         {
+            int latestProvidersCount = latestProviders.Count;
             int pagedProvidersCount = pagedProviders.Count;
+
+            int providersCount = latestProvidersCount + pagedProvidersCount;
+            if (providersCount == 0)
+            {
+                return new List<NewsItem>();
+            }
             
-            int providersCount = latestProviders.Count + pagedProvidersCount;
             int resultsPerLatestProvider = maxResults / providersCount; // TODO Make latestproviders handle stub too
 
-            IEnumerable<NewsItem> latestNews = await GetLatestNews(resultsPerLatestProvider, latestProviders);
+            List<NewsItem> latestNewsList;
+            if (latestProvidersCount > 0)
+            {
+                IEnumerable<NewsItem> latestNews = await GetLatestNews(resultsPerLatestProvider, latestProviders);
+                latestNewsList = latestNews.ToList();
+            }
+            else
+            {
+                latestNewsList = new List<NewsItem>();
+            }
 
-            List<NewsItem> latestNewsList = latestNews.ToList();
-            
-            IEnumerable<NewsItem> pagedNews = await GetPagedNews(
-                maxResults,
-                resultsPerLatestProvider,
-                latestNewsList.Count,
-                pagedProviders);
+
+            IEnumerable<NewsItem> pagedNews;
+            if (pagedProvidersCount > 0)
+            {
+                pagedNews = await GetPagedNews(
+                    maxResults,
+                    resultsPerLatestProvider,
+                    latestNewsList.Count,
+                    pagedProviders);
+            }
+            else
+            {
+                pagedNews = new List<NewsItem>();
+            }
 
             return latestNewsList
                 .Concat(pagedNews)
