@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Content.Api;
 using Content.Services;
@@ -20,11 +22,17 @@ namespace Content.Controllers
         [HttpGet]
         public Task<IEnumerable<NewsItem>> Get(
             [FromQuery] int maxResults,
-            [FromQuery] NewsSource[] excludedSources)
+            [FromQuery] string excludedSources)
         {
+            NewsSource[] excludedSourcesArray = JsonSerializer.Deserialize<NewsSource[]>(
+                excludedSources,
+                new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                });
             return _news.GetNews(
                 maxResults,
-                excludedSources);
+                excludedSourcesArray);
         }
     }
 }
