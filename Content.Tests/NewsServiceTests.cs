@@ -25,6 +25,18 @@ namespace Content.Tests
         }
         
         [Fact]
+        public async Task TestZeroProviders()
+        {
+            var newsService = new NewsService(
+                new ILatestNewsProvider[0],
+                new IPagedNewsProvider[0]);
+
+            var maxResults = 20;
+            IEnumerable<NewsItem> items = await newsService.GetNews(maxResults, new NewsSource[0]);
+            Assert.Empty(items);
+        }
+        
+        [Fact]
         public async Task TestOddNumber()
         {
             var paged = new PagedMockProvider();
