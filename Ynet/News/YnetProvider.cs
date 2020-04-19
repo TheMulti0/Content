@@ -22,7 +22,7 @@ namespace Ynet.News
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "http://rcs.mako.co.il/rss/31750a2610f26110VgnVCM1000005201000aRCRD.xml");
+                "http://www.ynet.co.il/Integration/StoryRss2.xml");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(

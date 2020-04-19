@@ -4,6 +4,7 @@
     {
         Mako,
         MakoReporters,
-        KanNews
+        Kan,
+        Ynet
     }
 }
