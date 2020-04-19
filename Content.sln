@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.Tests", "Content.Tests\Content.Tests.csproj", "{42BFB375-1A9E-476E-BCCD-24CB35FE9268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ynet", "Ynet\Ynet.csproj", "{874CA27C-5ED1-41CF-A216-C5942F6F1E97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{42BFB375-1A9E-476E-BCCD-24CB35FE9268}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42BFB375-1A9E-476E-BCCD-24CB35FE9268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42BFB375-1A9E-476E-BCCD-24CB35FE9268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874CA27C-5ED1-41CF-A216-C5942F6F1E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874CA27C-5ED1-41CF-A216-C5942F6F1E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874CA27C-5ED1-41CF-A216-C5942F6F1E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874CA27C-5ED1-41CF-A216-C5942F6F1E97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

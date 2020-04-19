@@ -1,14 +1,14 @@
 ﻿using Content.Api;
 
-namespace Mako.News
+namespace Ynet.News
 {
     public static class AuthorFactory
     {
         public static Author Create()
         {
             return new Author(
-                "החדשות 12",
-                "https://rcs.mako.co.il/images/svg/news/logo-n-12.svg");
+                "ynet",
+                "https://www.ynet.co.il/images/CENTRAL_1024_ynet_logo.png");
         } 
     }
 }

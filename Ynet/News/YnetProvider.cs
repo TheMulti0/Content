@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,16 +8,15 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Content.Api;
 using Extensions;
-using Mako.News.Entities;
+using Ynet.News.Entities;
 
-namespace Mako.News
+namespace Ynet.News
 {
-    public class MakoProvider : ILatestNewsProvider
+    public class YnetProvider : ILatestNewsProvider
     {
-        private const string BaseAddress = "http://rcs.mako.co.il/rss";
         private readonly RssFeedProvider _rss;
         
-        public MakoProvider(HttpClient httpClient = null)
+        public YnetProvider(HttpClient httpClient = null)
         {
             httpClient ??= new HttpClient();
             
@@ -30,7 +28,7 @@ namespace Mako.News
         public Task<IEnumerable<NewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
-            return _rss.GetNews<MakoRssFeed>(
+            return _rss.GetNews<YnetRssFeed>(
                 cancellationToken,
                 DeserializeItems);
         }
@@ -38,7 +36,7 @@ namespace Mako.News
         public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
-                DeserializeXml<MakoRssFeed>(xml));
+                DeserializeXml<YnetRssFeed>(xml));
         }
         
         private static T DeserializeXml<T>(Stream xml)
@@ -54,10 +52,11 @@ namespace Mako.News
             return (T) serializer.Deserialize(stream);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(MakoRssFeed feed)
+        private static IEnumerable<NewsItem> ToNewsItems(YnetRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);
         }
     }
+
 }
