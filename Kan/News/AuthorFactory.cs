@@ -12,7 +12,7 @@ namespace Kan.News
                 .InnerText;
             
             return new Author(
-                $"כאן - {name}",
+                name,
                 "https://www.kan.org.il/images/ic_add_black_1.svg");
         }
     }
