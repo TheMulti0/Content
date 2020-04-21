@@ -44,7 +44,7 @@ namespace Mako.Tests.N12Reports
             // if they were not initialized
 
             Assert.NotNull(item);
-            Assert.NotNull(item.Title);
+            Assert.True(item.Title != null || item.ImageUrl != null);
             Assert.NotEqual(DateTime.MinValue, item.Date);
         }
     }
