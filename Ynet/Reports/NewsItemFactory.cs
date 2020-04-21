@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Content.Api;
 using Ynet.Entities;
 
-namespace Ynet.News
+namespace Ynet.Reports
 {
     public static class NewsItemFactory
     {
@@ -18,9 +18,13 @@ namespace Ynet.News
 
             string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
+            if (imageUrl == "")
+            {
+                imageUrl = null;
+            }
             
             return new NewsItem(
-                NewsSource.Ynet,
+                NewsSource.YnetReporters,
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(),

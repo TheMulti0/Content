@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Ynet.News.Entities
+namespace Ynet.Entities
 {
     [XmlRoot(ElementName="channel")]
     public class YnetRssChannel 

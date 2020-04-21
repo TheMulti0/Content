@@ -5,6 +5,7 @@
         Mako,
         MakoReporters,
         Kan,
-        Ynet
+        Ynet,
+        YnetReporters
     }
 }

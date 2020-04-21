@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -10,19 +9,19 @@ using Content.Api;
 using Extensions;
 using Ynet.Entities;
 
-namespace Ynet.News
+namespace Ynet.Reports
 {
-    public class YnetProvider : ILatestNewsProvider
+    public class YnetReportsProvider : ILatestNewsProvider
     {
         private readonly RssFeedProvider _rss;
         
-        public YnetProvider(HttpClient httpClient = null)
+        public YnetReportsProvider(HttpClient httpClient = null)
         {
             httpClient ??= new HttpClient();
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "http://www.ynet.co.il/Integration/StoryRss2.xml");
+                "http://www.ynet.co.il/Integration/StoryRss1854.xml");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
@@ -43,13 +42,7 @@ namespace Ynet.News
         {
             var serializer = new XmlSerializer(typeof(T));
             
-            StreamReader reader = new StreamReader( xml );
-            string text = reader.ReadToEnd();
-            text = text.Substring(39); // Remove the root element (<xml>) since it has no closing tag
-            byte[] byteArray = Encoding.UTF8.GetBytes( text );
-            var stream = new MemoryStream( byteArray );
-            
-            return (T) serializer.Deserialize(stream);
+            return (T) serializer.Deserialize(xml);
         }
         
         private static IEnumerable<NewsItem> ToNewsItems(YnetRssFeed feed)

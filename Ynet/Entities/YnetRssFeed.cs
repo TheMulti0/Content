@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Ynet.News.Entities
+namespace Ynet.Entities
 {
     [XmlRoot(ElementName="rss")]
     public class YnetRssFeed 

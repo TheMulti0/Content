@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ynet.News;
+using Ynet.Reports;
 
 namespace Content
 {
@@ -38,6 +39,7 @@ namespace Content
 
             services.AddSingleton<ILatestNewsProvider, MakoProvider>();
             services.AddSingleton<ILatestNewsProvider, YnetProvider>();
+            services.AddSingleton<ILatestNewsProvider, YnetReportsProvider>();
             
             services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
