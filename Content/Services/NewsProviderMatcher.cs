@@ -3,6 +3,7 @@ using Kan.News;
 using Mako.N12Reports;
 using Mako.News;
 using Ynet.News;
+using Ynet.Reports;
 
 namespace Content.Services
 {
@@ -17,6 +18,9 @@ namespace Content.Services
                 
                 case YnetProvider _:
                     return NewsSource.Ynet;
+                
+                case YnetReportsProvider _:
+                    return NewsSource.YnetReports;
                 
                 default:
                     return null;

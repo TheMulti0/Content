@@ -24,7 +24,7 @@ namespace Ynet.Reports
             }
             
             return new NewsItem(
-                NewsSource.YnetReporters,
+                NewsSource.YnetReports,
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(),
