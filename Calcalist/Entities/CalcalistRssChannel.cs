@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Calcaist.Entities
+namespace Calcalist.Entities
 {
     [XmlRoot(ElementName="channel")]
-    public class CalcaistRssChannel 
+    public class CalcalistRssChannel
     {
         [XmlElement(ElementName="title")]
         public string Title { get; set; }
@@ -28,6 +28,6 @@ namespace Calcaist.Entities
         public CalcalistRssImage Image { get; set; }
 
         [XmlElement(ElementName="item")]
-        public List<CalcaistRssItem> Items { get; set; }
+        public List<CalcalistRssItem> Items { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Calcaist.Entities
+namespace Calcalist.Entities
 {
     [XmlRoot(ElementName = "item")]
     public class CalcalistRssImage

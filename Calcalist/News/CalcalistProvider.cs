@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Content.Api;
 using Extensions;
-using Calcaist.Entities;
+using Calcalist.Entities;
 
-namespace Calcaist.News
+namespace Calcalist.News
 {
-    public class CalcaistProvider : ILatestNewsProvider
+    public class CalcalistProvider : ILatestNewsProvider
     {
         private readonly RssFeedProvider _rss;
         
-        public CalcaistProvider(HttpClient httpClient = null)
+        public CalcalistProvider(HttpClient httpClient = null)
         {
             httpClient ??= new HttpClient();
             
@@ -28,7 +28,7 @@ namespace Calcaist.News
         public Task<IEnumerable<NewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
-            return _rss.GetNews<CalcaistRssFeed>(
+            return _rss.GetNews(
                 cancellationToken,
                 DeserializeItems);
         }
@@ -36,23 +36,17 @@ namespace Calcaist.News
         public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
-                DeserializeXml<CalcaistRssFeed>(xml));
+                DeserializeXml(xml));
         }
         
-        private static T DeserializeXml<T>(Stream xml)
+        private static CalcalistRssFeed DeserializeXml(Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            
-            StreamReader reader = new StreamReader( xml );
-            string text = reader.ReadToEnd();
-            text = text.Substring(39); // Remove the root element (<xml>) since it has no closing tag
-            byte[] byteArray = Encoding.UTF8.GetBytes( text );
-            var stream = new MemoryStream( byteArray );
-            
-            return (T) serializer.Deserialize(stream);
+            var serializer = new XmlSerializer(typeof(CalcalistRssFeed));
+
+            return (CalcalistRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(CalcaistRssFeed feed)
+        private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

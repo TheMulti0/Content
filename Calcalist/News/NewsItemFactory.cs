@@ -2,21 +2,21 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Api;
-using Calcaist.Entities;
+using Calcalist.Entities;
 
-namespace Calcaist.News
+namespace Calcalist.News
 {
     public static class NewsItemFactory
     {
         private const string ContentPattern = "<\\/div>(.*)";
         private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
         
-        public static NewsItem Create(CalcaistRssItem rssItem)
+        public static NewsItem Create(CalcalistRssItem rssItem)
         {
             // Date example: Mon, 24 Feb 2020 09:44:00 +0200
             DateTime date = DateTime.Parse(rssItem.PublishDate);
 
-            string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
+            string description = Regex.Match(rssItem.Description, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
             
             return new NewsItem(

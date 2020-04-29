@@ -1,6 +1,6 @@
 ﻿using Content.Api;
 
-namespace Calcaist.News
+namespace Calcalist.News
 {
     public static class AuthorFactory
     {

@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace Calcaist.Entities
+namespace Calcalist.Entities
 {
     [XmlRoot(ElementName="item")]
-    public class CalcaistRssItem
+    public class CalcalistRssItem
     {
         [XmlElement(ElementName = "category")]
         public string Category { get; set; }
