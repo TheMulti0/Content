@@ -5,23 +5,27 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Content", "Content\Content.csproj", "{34F2C1B6-2A90-4CF0-AE63-F284105E3E23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.Api", "Content.Api\Content.Api.csproj", "{73761AF9-3F64-42FF-A998-EF713CA9D527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Content.Api", "Content.Api\Content.Api.csproj", "{73761AF9-3F64-42FF-A998-EF713CA9D527}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mako", "Mako\Mako.csproj", "{B9C97222-F775-4922-92FE-7EEB24FF5A77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mako", "Mako\Mako.csproj", "{B9C97222-F775-4922-92FE-7EEB24FF5A77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mako.Tests", "Mako.Tests\Mako.Tests.csproj", "{41A3B9B8-447A-4A64-882A-F1CC40DF5938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mako.Tests", "Mako.Tests\Mako.Tests.csproj", "{41A3B9B8-447A-4A64-882A-F1CC40DF5938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kan", "Kan\Kan.csproj", "{86A6D558-51D2-4871-B4C1-9F7F685F5241}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kan", "Kan\Kan.csproj", "{86A6D558-51D2-4871-B4C1-9F7F685F5241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kan.Tests", "Kan.Tests\Kan.Tests.csproj", "{6E5B2487-DF20-4456-BCA5-EEC19EC29754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kan.Tests", "Kan.Tests\Kan.Tests.csproj", "{6E5B2487-DF20-4456-BCA5-EEC19EC29754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{B5D85EFE-9338-4415-9B40-4214527A45D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "Extensions\Extensions.csproj", "{B5D85EFE-9338-4415-9B40-4214527A45D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.Tests", "Content.Tests\Content.Tests.csproj", "{42BFB375-1A9E-476E-BCCD-24CB35FE9268}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Content.Tests", "Content.Tests\Content.Tests.csproj", "{42BFB375-1A9E-476E-BCCD-24CB35FE9268}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ynet", "Ynet\Ynet.csproj", "{874CA27C-5ED1-41CF-A216-C5942F6F1E97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ynet", "Ynet\Ynet.csproj", "{874CA27C-5ED1-41CF-A216-C5942F6F1E97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ynet.Tests", "Ynet.Tests\Ynet.Tests.csproj", "{6A01D903-447A-454B-9308-0FC093FA9E81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ynet.Tests", "Ynet.Tests\Ynet.Tests.csproj", "{6A01D903-447A-454B-9308-0FC093FA9E81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calcalist", "Calcalist\Calcalist.csproj", "{BA343B2F-385A-4BA8-ABD9-8501C31CDC10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calcalist.Tests", "Calcalist.Tests\Calcalist.Tests.csproj", "{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{6A01D903-447A-454B-9308-0FC093FA9E81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A01D903-447A-454B-9308-0FC093FA9E81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A01D903-447A-454B-9308-0FC093FA9E81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA343B2F-385A-4BA8-ABD9-8501C31CDC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA343B2F-385A-4BA8-ABD9-8501C31CDC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA343B2F-385A-4BA8-ABD9-8501C31CDC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA343B2F-385A-4BA8-ABD9-8501C31CDC10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

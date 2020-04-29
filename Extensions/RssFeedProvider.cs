@@ -23,7 +23,7 @@ namespace Extensions
             _rssFeed = rssFeed;
         }
         
-        public async Task<IEnumerable<NewsItem>> GetNews<T>(
+        public async Task<IEnumerable<NewsItem>> GetNews(
             CancellationToken cancellationToken,
             Func<Stream, IEnumerable<NewsItem>> deserializeItems)
         {

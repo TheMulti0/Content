@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Calcalist\Calcalist.csproj" />
     <ProjectReference Include="..\Content.Api\Content.Api.csproj" />
     <ProjectReference Include="..\Kan\Kan.csproj" />
     <ProjectReference Include="..\Mako\Mako.csproj" />

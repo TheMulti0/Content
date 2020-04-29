@@ -28,7 +28,7 @@ namespace Mako.News
         public Task<IEnumerable<NewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
-            return _rss.GetNews<MakoRssFeed>(
+            return _rss.GetNews(
                 cancellationToken,
                 DeserializeItems);
         }
