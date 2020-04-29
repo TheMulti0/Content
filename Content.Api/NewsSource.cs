@@ -6,6 +6,7 @@
         MakoReporters,
         Kan,
         Ynet,
-        YnetReports
+        YnetReports,
+        Calcalist
     }
 }
