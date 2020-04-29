@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Calcalist.News;
 using Content.Api;
 using Content.Services;
 using Kan.News;
@@ -40,6 +41,7 @@ namespace Content
             services.AddSingleton<ILatestNewsProvider, MakoProvider>();
             services.AddSingleton<ILatestNewsProvider, YnetProvider>();
             services.AddSingleton<ILatestNewsProvider, YnetReportsProvider>();
+            services.AddSingleton<ILatestNewsProvider, CalcalistProvider>();
             
             services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
