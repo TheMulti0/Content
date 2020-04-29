@@ -20,10 +20,10 @@ namespace Calcaist.News
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
             
             return new NewsItem(
-                NewsSource.Calcaist,
+                NewsSource.Calcalist,
                 rssItem.Title,
                 description,
-                AuthorFactory.Create(),
+                AuthorFactory.Create(rssItem.Author),
                 date,
                 rssItem.Link,
                 imageUrl,

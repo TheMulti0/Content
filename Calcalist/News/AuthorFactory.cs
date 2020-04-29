@@ -4,11 +4,11 @@ namespace Calcaist.News
 {
     public static class AuthorFactory
     {
-        public static Author Create()
+        public static Author Create(string author)
         {
             return new Author(
-                "ynet",
-                "https://www.ynet.co.il/images/CENTRAL_1024_ynet_logo.png");
+                author,
+                "https://www.calcalist.co.il/favicon64x64.ico");
         } 
     }
 }

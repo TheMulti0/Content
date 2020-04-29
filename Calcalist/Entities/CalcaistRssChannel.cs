@@ -12,8 +12,8 @@ namespace Calcaist.Entities
         [XmlElement(ElementName="link")]
         public string Link { get; set; }
         
-        [XmlElement(ElementName="description")]
-        public string Description { get; set; }
+        [XmlElement(ElementName="copyright")]
+        public string Copyright { get; set; }
         
         [XmlElement(ElementName="language")]
         public string Language { get; set; }
@@ -23,7 +23,10 @@ namespace Calcaist.Entities
         
         [XmlElement(ElementName="lastBuildDate")]
         public string LastBuildDate { get; set; }
-        
+
+        [XmlElement(ElementName = "image")]
+        public CalcalistRssImage Image { get; set; }
+
         [XmlElement(ElementName="item")]
         public List<CalcaistRssItem> Items { get; set; }
     }

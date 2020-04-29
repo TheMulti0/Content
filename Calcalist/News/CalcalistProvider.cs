@@ -22,7 +22,7 @@ namespace Calcaist.News
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "http://www.ynet.co.il/Integration/StoryRss2.xml");
+                "https://www.calcalist.co.il/GeneralRSS/0,16335,L-8,00.xml");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
