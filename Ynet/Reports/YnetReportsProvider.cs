@@ -27,7 +27,7 @@ namespace Ynet.Reports
         public Task<IEnumerable<NewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
-            return _rss.GetNews<YnetRssFeed>(
+            return _rss.GetNews(
                 cancellationToken,
                 DeserializeItems);
         }
