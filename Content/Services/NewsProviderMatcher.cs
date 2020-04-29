@@ -1,4 +1,5 @@
 ﻿using Calcalist.News;
+using Calcalist.Reports;
 using Content.Api;
 using Kan.News;
 using Mako.N12Reports;
@@ -25,6 +26,9 @@ namespace Content.Services
 
                 case CalcalistProvider _:
                     return NewsSource.Calcalist;
+                
+                case CalcalistReportsProvider _:
+                    return NewsSource.CalcalistReports;
                 
                 default:
                     return null;

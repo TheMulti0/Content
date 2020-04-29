@@ -7,6 +7,7 @@
         Kan,
         Ynet,
         YnetReports,
-        Calcalist
+        Calcalist,
+        CalcalistReports
     }
 }
