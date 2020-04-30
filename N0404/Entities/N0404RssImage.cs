@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace Calcalist.Entities
+namespace N0404.Entities
 {
     [XmlRoot(ElementName = "item")]
-    public class CalcalistRssImage
+    public class N0404RssImage
     {
         [XmlElement(ElementName = "title")]
         public string Title { get; set; }

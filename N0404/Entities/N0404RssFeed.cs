@@ -1,12 +1,12 @@
 ﻿using System.Xml.Serialization;
 
-namespace Calcalist.Entities
+namespace N0404.Entities
 {
     [XmlRoot(ElementName="rss")]
-    public class CalcalistRssFeed
+    public class N0404RssFeed
     {
         [XmlElement(ElementName="channel")]
-        public CalcalistRssChannel Channel { get; set; }
+        public N0404RssChannel Channel { get; set; }
         
         [XmlAttribute(AttributeName="version")]
         public string Version { get; set; }

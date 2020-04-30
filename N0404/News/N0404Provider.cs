@@ -2,21 +2,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Content.Api;
 using Extensions;
-using Calcalist.Entities;
+using N0404.Entities;
 
-namespace Calcalist.News
+namespace N0404.News
 {
-    public class CalcalistProvider : ILatestNewsProvider
+    public class N0404Provider : ILatestNewsProvider
     {
         private readonly RssFeedProvider _rss;
         
-        public CalcalistProvider(HttpClient httpClient = null)
+        public N0404Provider(HttpClient httpClient = null)
         {
             httpClient ??= new HttpClient();
             
@@ -39,14 +38,14 @@ namespace Calcalist.News
                 DeserializeXml(xml));
         }
         
-        private static CalcalistRssFeed DeserializeXml(Stream xml)
+        private static N0404RssFeed DeserializeXml(Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(CalcalistRssFeed));
+            var serializer = new XmlSerializer(typeof(N0404RssFeed));
 
-            return (CalcalistRssFeed) serializer.Deserialize(xml);
+            return (N0404RssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
+        private static IEnumerable<NewsItem> ToNewsItems(N0404RssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

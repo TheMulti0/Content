@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Calcalist.Entities
+namespace N0404.Entities
 {
     [XmlRoot(ElementName="channel")]
-    public class CalcalistRssChannel
+    public class N0404RssChannel
     {
         [XmlElement(ElementName="title")]
         public string Title { get; set; }
@@ -25,9 +25,9 @@ namespace Calcalist.Entities
         public string LastBuildDate { get; set; }
 
         [XmlElement(ElementName = "image")]
-        public CalcalistRssImage Image { get; set; }
+        public N0404RssImage Image { get; set; }
 
         [XmlElement(ElementName="item")]
-        public List<CalcalistRssItem> Items { get; set; }
+        public List<N0404RssItem> Items { get; set; }
     }
 }
