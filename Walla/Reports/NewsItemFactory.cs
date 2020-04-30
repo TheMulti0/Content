@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Api;
@@ -8,7 +8,7 @@ namespace Walla.Reports
 {
     public static class NewsItemFactory
     {
-        private const string ContentPattern = "<\\/div>(.*)";
+        private const string ContentPattern = "<br\\/>(.*)<\\/p";
         private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
         
         public static NewsItem Create(WallaRssItem rssItem)
