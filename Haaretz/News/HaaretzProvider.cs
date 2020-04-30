@@ -21,7 +21,7 @@ namespace Haaretz.News
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "https://rss.walla.co.il/feed/1?type=main");
+                "https://www.haaretz.co.il/cmlink/1.1617539");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
