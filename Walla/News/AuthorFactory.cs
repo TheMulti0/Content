@@ -1,4 +1,6 @@
-﻿namespace Walla.News
+﻿using Content.Api;
+
+namespace Walla.News
 {
     public static class AuthorFactory
     {
