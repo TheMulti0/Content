@@ -15,16 +15,16 @@ namespace N0404.Entities
         [XmlElement(ElementName="pubDate")]
         public string PublishDate { get; set; }
 
-        [XmlElement(ElementName = "creator")]
+        [XmlElement(ElementName = "creator", Namespace="http://purl.org/dc/elements/1.1/")]
         public string Creator { get; set; }
 
-        [XmlElement(ElementName = "identifier")]
+        [XmlElement(ElementName = "identifier", Namespace="http://purl.org/dc/elements/1.1/")]
         public string Identifier { get; set; }
 
-        [XmlElement(ElementName = "modified")]
+        [XmlElement(ElementName = "modified", Namespace="http://purl.org/dc/elements/1.1/")]
         public string Modified { get; set; }
 
-        [XmlElement(ElementName = "created")]
+        [XmlElement(ElementName = "created", Namespace="http://purl.org/dc/elements/1.1/")]
         public string Created { get; set; }
 
         [XmlElement(ElementName="guid")]
@@ -36,20 +36,10 @@ namespace N0404.Entities
         [XmlElement(ElementName="description")]
         public string Description { get; set; }
 
-        [XmlElement(ElementName="encoded")]
+        [XmlElement(ElementName="encoded", Namespace="http://purl.org/rss/1.0/modules/content/")]
         public string Encoded { get; set; }
         
         [XmlElement(ElementName="enclosure")]
         public N0404RssEnclosure Enclosure { get; set; }
-    }
-    
-    [XmlRoot(ElementName="enclosure")]
-    public class N0404RssEnclosure
-    {
-        [XmlAttribute("url")]
-        public string Url { get; set; }
-        
-        [XmlAttribute("type")]
-        public string Type { get; set; }
     }
 }
