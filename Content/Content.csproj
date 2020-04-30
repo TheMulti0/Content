@@ -10,6 +10,7 @@
     <ProjectReference Include="..\Content.Api\Content.Api.csproj" />
     <ProjectReference Include="..\Kan\Kan.csproj" />
     <ProjectReference Include="..\Mako\Mako.csproj" />
+    <ProjectReference Include="..\Walla\Walla.csproj" />
     <ProjectReference Include="..\Ynet\Ynet.csproj" />
   </ItemGroup>
 

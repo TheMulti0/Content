@@ -9,7 +9,6 @@ namespace Walla.Reports
     public static class NewsItemFactory
     {
         private const string ContentPattern = "<br\\/>(.*)<\\/p";
-        private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
         
         public static NewsItem Create(WallaRssItem rssItem)
         {
@@ -17,20 +16,15 @@ namespace Walla.Reports
             DateTime date = DateTime.Parse(rssItem.PublishDate);
 
             string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
-            string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
-            if (imageUrl == "")
-            {
-                imageUrl = null;
-            }
             
             return new NewsItem(
-                NewsSource.CalcalistReports,
+                NewsSource.WallaReports,
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(),
                 date,
                 rssItem.Link,
-                imageUrl,
+                null,
                 null);
         }
     }

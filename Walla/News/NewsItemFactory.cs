@@ -20,7 +20,7 @@ namespace Walla.News
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
             
             return new NewsItem(
-                NewsSource.Calcalist,
+                NewsSource.Walla,
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(),

@@ -8,6 +8,8 @@
         Ynet,
         YnetReports,
         Calcalist,
-        CalcalistReports
+        CalcalistReports,
+        Walla,
+        WallaReports
     }
 }
