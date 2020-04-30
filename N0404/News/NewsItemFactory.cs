@@ -20,7 +20,7 @@ namespace N0404.News
                 NewsSource.Calcalist,
                 rssItem.Title,
                 description,
-                AuthorFactory.Create(rssItem.Author),
+                AuthorFactory.Create(rssItem.Creator),
                 rssItem.PublishDate.ToDateTime(),
                 rssItem.Link,
                 imageUrl,
