@@ -22,7 +22,7 @@ namespace TheMarker.News
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "https://www.TheMarker.co.il/GeneralRSS/0,16335,L-8,00.xml");
+                "https://www.themarker.com/cmlink/1.144");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
@@ -52,5 +52,4 @@ namespace TheMarker.News
                 .Select(NewsItemFactory.Create);
         }
     }
-
 }
