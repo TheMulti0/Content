@@ -4,6 +4,8 @@ using Content.Api;
 using Kan.News;
 using Mako.N12Reports;
 using Mako.News;
+using Walla.News;
+using Walla.Reports;
 using Ynet.News;
 using Ynet.Reports;
 
@@ -29,6 +31,12 @@ namespace Content.Services
                 
                 case CalcalistReportsProvider _:
                     return NewsSource.CalcalistReports;
+                
+                case WallaProvider _:
+                    return NewsSource.Walla;
+                
+                case WallaReportsProvider _:
+                    return NewsSource.WallaReports;
                 
                 default:
                     return null;

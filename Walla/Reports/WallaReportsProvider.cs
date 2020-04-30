@@ -5,23 +5,23 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Calcalist.Entities;
 using Content.Api;
 using Extensions;
+using Walla.Entities;
 
-namespace Calcalist.Reports
+namespace Walla.Reports
 {
-    public class CalcalistReportsProvider : ILatestNewsProvider
+    public class WallaReportsProvider : ILatestNewsProvider
     {
         private readonly RssFeedProvider _rss;
         
-        public CalcalistReportsProvider(HttpClient httpClient = null)
+        public WallaReportsProvider(HttpClient httpClient = null)
         {
             httpClient ??= new HttpClient();
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "http://www.ynet.co.il/Integration/StoryRss1854.xml");
+                "https://rss.walla.co.il/feed/22");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
@@ -38,14 +38,14 @@ namespace Calcalist.Reports
                 DeserializeXml(xml));
         }
         
-        private static CalcalistRssFeed DeserializeXml (Stream xml)
+        private static WallaRssFeed DeserializeXml(Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(CalcalistRssFeed));
+            var serializer = new XmlSerializer(typeof(WallaRssFeed));
             
-            return (CalcalistRssFeed) serializer.Deserialize(xml);
+            return (WallaRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
+        private static IEnumerable<NewsItem> ToNewsItems(WallaRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);
