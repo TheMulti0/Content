@@ -8,11 +8,10 @@
         Kan,
         Mako,
         MakoReporters,
+        N0404,
         TheMarker,
         Walla,
         WallaReports,
-        Haaretz,
-        N0404,
         Ynet,
         YnetReports
     }
