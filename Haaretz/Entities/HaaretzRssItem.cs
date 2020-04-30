@@ -13,8 +13,14 @@ namespace Haaretz.Entities
 
         [XmlElement(ElementName="description")]
         public string Description { get; set; }
+
+        [XmlElement(ElementName = "guid")]
+        public double Guid { get; set; }
         
         [XmlElement(ElementName="pubDate")]
         public string PublishDate { get; set; }
+
+        [XmlElement("enclosure")]
+        public HaaretzRssEnclosure Enclosure { get; set; }
     }
 }
