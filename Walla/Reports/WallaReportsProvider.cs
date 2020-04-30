@@ -21,7 +21,7 @@ namespace Walla.Reports
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "http://www.ynet.co.il/Integration/StoryRss1854.xml");
+                "https://rss.walla.co.il/feed/22");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(

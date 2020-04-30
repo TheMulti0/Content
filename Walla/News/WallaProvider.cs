@@ -21,7 +21,7 @@ namespace Walla.News
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "https://www.calcalist.co.il/GeneralRSS/0,16335,L-8,00.xml");
+                "https://rss.walla.co.il/feed/1?type=main");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
