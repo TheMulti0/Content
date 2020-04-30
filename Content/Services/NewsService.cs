@@ -33,12 +33,47 @@ namespace Content.Services
                  excludedSources,
                  provider => provider.GetProviderType());
 
-            return await GetNews(
-                maxResults,
-                latestProviders,
-                pagedProviders);
+
+            return await GetAllItems(maxResults, latestProviders, pagedProviders);
         }
-        
+
+        private static async Task<IEnumerable<NewsItem>> GetAllItems(
+            int maxResults,
+            IEnumerable<ILatestNewsProvider> latestProviders,
+            IEnumerable<IPagedNewsProvider> pagedProviders)
+        {
+            IEnumerable<NewsItem> orderedItems = OrderItems(
+                await GetAllItems(latestProviders, pagedProviders));
+
+            return maxResults < 1
+                ? orderedItems
+                : orderedItems.Take(maxResults);
+        }
+
+        private static async Task<List<NewsItem>> GetAllItems(
+            IEnumerable<ILatestNewsProvider> latestProviders,
+            IEnumerable<IPagedNewsProvider> pagedProviders)
+        {
+            var items = new List<NewsItem>();
+
+            foreach (ILatestNewsProvider provider in latestProviders)
+            {
+                items.AddRange(await provider.GetNews());
+            }
+            foreach (IPagedNewsProvider provider in pagedProviders)
+            {
+                items.AddRange(
+                    await provider.GetNews(provider.MaximumItemsPerPage));
+            }
+            return items;
+        }
+
+        private static IEnumerable<NewsItem> OrderItems(List<NewsItem> items)
+        {
+            return items
+                .OrderByDescending(item => item.Date);
+        }
+
         private static T[] GetCorrectProviders<T>(
             T[] providers,
             NewsSource[] excludedSources,
@@ -62,108 +97,6 @@ namespace Content.Services
                     .ToArray();
             }
             return providers;
-        }
-
-        private static async Task<IEnumerable<NewsItem>> GetNews(
-            int maxResults,
-            IReadOnlyCollection<ILatestNewsProvider> latestProviders,
-            IReadOnlyCollection<IPagedNewsProvider> pagedProviders)
-        {
-            int latestProvidersCount = latestProviders.Count;
-            int pagedProvidersCount = pagedProviders.Count;
-
-            int providersCount = latestProvidersCount + pagedProvidersCount;
-            if (providersCount == 0)
-            {
-                return new List<NewsItem>();
-            }
-            int perProvider = maxResults / providersCount;
-            int stubForAll = maxResults % providersCount;
-            int resultsPerLatestProvider = perProvider + stubForAll / providersCount; // TODO Make latestproviders handle stub too
-
-            List<NewsItem> latestNewsList;
-            if (latestProvidersCount > 0)
-            {
-                IEnumerable<NewsItem> latestNews = await GetLatestNews(resultsPerLatestProvider, latestProviders);
-                latestNewsList = latestNews.ToList();
-            }
-            else
-            {
-                latestNewsList = new List<NewsItem>();
-            }
-
-
-            IEnumerable<NewsItem> pagedNews;
-            if (pagedProvidersCount > 0)
-            {
-                pagedNews = await GetPagedNews(
-                    maxResults,
-                    resultsPerLatestProvider,
-                    latestNewsList.Count,
-                    pagedProviders);
-            }
-            else
-            {
-                pagedNews = new List<NewsItem>();
-            }
-
-            return latestNewsList
-                .Concat(pagedNews)
-                .OrderByDescending(item => item.Date);
-        }
-
-        private static ValueTask<IEnumerable<NewsItem>> GetLatestNews(
-            int resultsPerLatestProvider,
-            IEnumerable<ILatestNewsProvider> latestProviders)
-        {
-            async ValueTask<IEnumerable<NewsItem>> GetNews(ILatestNewsProvider provider, int _)
-            {
-                IEnumerable<NewsItem> items = await provider.GetNews();
-
-                return items.Take(resultsPerLatestProvider);
-            }
-
-            return GetProviderNews(latestProviders, GetNews);
-        }
-
-        private static ValueTask<IEnumerable<NewsItem>> GetPagedNews(
-            int maxResults,
-            int resultsPerLatestProvider,
-            int receivedItemsCount,
-            IReadOnlyCollection<IPagedNewsProvider> pagedProviders)
-        {
-            int overallGap = maxResults - receivedItemsCount - resultsPerLatestProvider;
-            
-            int pagedProvidersCount = pagedProviders.Count;
-
-            int extra = overallGap / pagedProvidersCount;
-            int resultsPerPagedProvider = resultsPerLatestProvider + extra;
-            int stub = overallGap % pagedProvidersCount;
-
-            async ValueTask<IEnumerable<NewsItem>> GetNews(
-                IPagedNewsProvider provider,
-                int index)
-            {
-                int resultsToTake = resultsPerPagedProvider;
-                if (index == pagedProvidersCount)
-                {
-                    resultsToTake += stub;
-                }
-                
-                return await provider.GetNews(resultsToTake);
-            }
-
-            return GetProviderNews(pagedProviders, GetNews);
-        }
-
-        private static ValueTask<IEnumerable<NewsItem>> GetProviderNews<T>(
-            IEnumerable<T> providers,
-            Func<T, int, ValueTask<IEnumerable<NewsItem>>> getNews)
-        {
-            return providers
-                .ToAsyncEnumerable()
-                .SelectAwait(getNews)
-                .AggregateAsync((lhs, rhs) => lhs.Concat(rhs));
         }
     }
 }
