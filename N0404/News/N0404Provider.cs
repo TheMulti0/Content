@@ -21,7 +21,7 @@ namespace N0404.News
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "https://www.calcalist.co.il/GeneralRSS/0,16335,L-8,00.xml");
+                "https://www.0404.co.il/?call_custom_simple_rss=1&csrp_cat=14");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
