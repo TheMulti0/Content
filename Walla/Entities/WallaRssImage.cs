@@ -13,5 +13,11 @@ namespace Walla.Entities
 
         [XmlElement(ElementName = "url")]
         public string Url { get; set; }
+        
+        [XmlElement(ElementName = "width")]
+        public int Width { get; set; }
+        
+        [XmlElement(ElementName = "height")]
+        public int Height { get; set; }
     }
 }
