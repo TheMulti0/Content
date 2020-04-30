@@ -5,6 +5,7 @@ using Haaretz.News;
 using Kan.News;
 using Mako.N12Reports;
 using Mako.News;
+using N0404.News;
 using TheMarker.News;
 using Walla.News;
 using Walla.Reports;
@@ -45,6 +46,9 @@ namespace Content.Services
 
                 case TheMarkerProvider _:
                     return NewsSource.TheMarker;
+                
+                case N0404Provider _:
+                    return NewsSource.N0404;
                 
                 default:
                     return null;

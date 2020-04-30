@@ -11,7 +11,9 @@
         TheMarker,
         Walla,
         WallaReports,
+        Haaretz,
+        N0404,
         Ynet,
-        YnetReports,
+        YnetReports
     }
 }
