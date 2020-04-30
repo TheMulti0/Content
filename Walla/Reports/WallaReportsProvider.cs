@@ -35,14 +35,14 @@ namespace Walla.Reports
         public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
-                DeserializeXml<WallaRssFeed>(xml));
+                DeserializeXml(xml));
         }
         
-        private static T DeserializeXml<T>(Stream xml)
+        private static WallaRssFeed DeserializeXml(Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(WallaRssFeed));
             
-            return (T) serializer.Deserialize(xml);
+            return (WallaRssFeed) serializer.Deserialize(xml);
         }
         
         private static IEnumerable<NewsItem> ToNewsItems(WallaRssFeed feed)

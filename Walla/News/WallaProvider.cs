@@ -38,14 +38,14 @@ namespace Walla.News
                 DeserializeXml(xml));
         }
         
-        private static CalcalistRssFeed DeserializeXml(Stream xml)
+        private static WallaRssFeed DeserializeXml(Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(CalcalistRssFeed));
+            var serializer = new XmlSerializer(typeof(WallaRssFeed));
 
-            return (CalcalistRssFeed) serializer.Deserialize(xml);
+            return (WallaRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
+        private static IEnumerable<NewsItem> ToNewsItems(WallaRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);
