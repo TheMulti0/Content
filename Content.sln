@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calcalist", "Calcalist\Calc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calcalist.Tests", "Calcalist.Tests\Calcalist.Tests.csproj", "{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walla", "Walla\Walla.csproj", "{1BC50895-D159-4FA0-B3DD-EFB1E094EA06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD87000-3A5A-45C9-A284-DD6B69BB71AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC50895-D159-4FA0-B3DD-EFB1E094EA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC50895-D159-4FA0-B3DD-EFB1E094EA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC50895-D159-4FA0-B3DD-EFB1E094EA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC50895-D159-4FA0-B3DD-EFB1E094EA06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
