@@ -8,7 +8,7 @@ namespace Haaretz.News
         {
             return new Author(
                 "הארץ",
-                "https://svgshare.com/i/Kcj.svg");
+                "https://lh3.googleusercontent.com/-dixTUU1NvVs/AAAAAAAAAAI/AAAAAAADqH4/Hs30MRP83Oo/s640/photo.jpg");
         } 
     }
 }

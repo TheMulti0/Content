@@ -12,7 +12,7 @@ namespace Haaretz.News
             DateTime date = DateTime.Parse(rssItem.PublishDate);
 
             return new NewsItem(
-                NewsSource.Walla,
+                NewsSource.Haaretz,
                 rssItem.Title,
                 rssItem.Description,
                 AuthorFactory.Create(),

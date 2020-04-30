@@ -1,6 +1,7 @@
 ﻿using Calcalist.News;
 using Calcalist.Reports;
 using Content.Api;
+using Haaretz.News;
 using Kan.News;
 using Mako.N12Reports;
 using Mako.News;
@@ -37,6 +38,9 @@ namespace Content.Services
                 
                 case WallaReportsProvider _:
                     return NewsSource.WallaReports;
+                
+                case HaaretzProvider _:
+                    return NewsSource.Haaretz;
                 
                 default:
                     return null;
