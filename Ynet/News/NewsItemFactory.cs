@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Api;
+using Extensions;
 using Ynet.Entities;
 
 namespace Ynet.News
@@ -13,9 +15,6 @@ namespace Ynet.News
         
         public static NewsItem Create(YnetRssItem rssItem)
         {
-            // Date example: Mon, 24 Feb 2020 09:44:00 +0200
-            DateTime date = DateTime.Parse(rssItem.PublishDate);
-
             string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
             
@@ -24,7 +23,7 @@ namespace Ynet.News
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(),
-                date,
+                rssItem.PublishDate.ToDateTime(),
                 rssItem.Link,
                 imageUrl,
                 null);

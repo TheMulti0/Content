@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Extensions;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Calcalist.Entities;
@@ -13,9 +13,6 @@ namespace Calcalist.Reports
         
         public static NewsItem Create(CalcalistRssItem rssItem)
         {
-            // Date example: Mon, 24 Feb 2020 09:44:00 +0200
-            DateTime date = DateTime.Parse(rssItem.PublishDate);
-
             string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
             if (imageUrl == "")
@@ -28,7 +25,7 @@ namespace Calcalist.Reports
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(rssItem.Author),
-                date,
+                rssItem.PublishDate.ToDateTime(),
                 rssItem.Link,
                 imageUrl,
                 null);

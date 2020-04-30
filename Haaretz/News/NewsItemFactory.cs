@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Extensions;
 using Content.Api;
 using Haaretz.Entities;
 
@@ -8,15 +8,12 @@ namespace Haaretz.News
     {
         public static NewsItem Create(HaaretzRssItem rssItem)
         {
-            // Date example: Mon, 24 Feb 2020 09:44:00 +0200
-            DateTime date = DateTime.Parse(rssItem.PublishDate);
-
             return new NewsItem(
                 NewsSource.Haaretz,
                 rssItem.Title,
                 rssItem.Description,
                 AuthorFactory.Create(),
-                date,
+                rssItem.PublishDate.ToDateTime(),
                 rssItem.Link,
                 rssItem.Enclosure.Url,
                 null);

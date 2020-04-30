@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Api;
+using Extensions;
 using Walla.Entities;
 
 namespace Walla.News
@@ -13,9 +14,6 @@ namespace Walla.News
         
         public static NewsItem Create(WallaRssItem rssItem)
         {
-            // Date example: Mon, 24 Feb 2020 09:44:00 +0200
-            DateTime date = DateTime.Parse(rssItem.PublishDate);
-
             string description = Regex.Match(rssItem.Description, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
             
@@ -24,7 +22,7 @@ namespace Walla.News
                 rssItem.Title,
                 description,
                 AuthorFactory.Create(),
-                date,
+                rssItem.PublishDate.ToDateTime(),
                 rssItem.Link,
                 imageUrl,
                 null);
