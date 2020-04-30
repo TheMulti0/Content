@@ -4,11 +4,11 @@ namespace Walla.Reports
 {
     public static class AuthorFactory
     {
-        public static Author Create(string author)
+        public static Author Create()
         {
             return new Author(
-                author,
-                "https://www.calcalist.co.il/favicon64x64.ico");
+                "וואלה! מבזקים",
+                "https://news.walla.co.il/images/logo-mobile.svg");
         } 
     }
 }

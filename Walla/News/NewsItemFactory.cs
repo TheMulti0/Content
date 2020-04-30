@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Api;
@@ -23,7 +23,7 @@ namespace Walla.News
                 NewsSource.Calcalist,
                 rssItem.Title,
                 description,
-                AuthorFactory.Create(rssItem.Author),
+                AuthorFactory.Create(),
                 date,
                 rssItem.Link,
                 imageUrl,
