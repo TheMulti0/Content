@@ -4,11 +4,11 @@ namespace N0404.News
 {
     public static class AuthorFactory
     {
-        public static Author Create(string author)
+        public static Author Create()
         {
             return new Author(
-                author,
-                "https://www.calcalist.co.il/favicon64x64.ico");
+                "0404",
+                "https://upload.wikimedia.org/wikipedia/he/thumb/9/98/0404_News_logo.svg/1200px-0404_News_logo.svg.png");
         } 
     }
 }

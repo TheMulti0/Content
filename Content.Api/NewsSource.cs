@@ -11,6 +11,7 @@
         CalcalistReports,
         Walla,
         WallaReports,
-        Haaretz
+        Haaretz,
+        N0404
     }
 }

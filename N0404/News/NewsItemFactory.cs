@@ -16,10 +16,10 @@ namespace N0404.News
             string description = Regex.Match(rssItem.Encoded, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
             
             return new NewsItem(
-                NewsSource.Calcalist,
+                NewsSource.N0404,
                 HttpUtility.HtmlDecode(rssItem.Title),
                 HttpUtility.HtmlDecode(description),
-                AuthorFactory.Create(rssItem.Creator),
+                AuthorFactory.Create(),
                 rssItem.Modified.ToDateTime(),
                 rssItem.Link,
                 rssItem.Enclosure.Url,
