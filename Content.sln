@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walla", "Walla\Walla.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walla.Tests", "Walla.Tests\Walla.Tests.csproj", "{69B5CC9B-642E-466F-82C2-339A387ECFE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haaretz", "Haaretz\Haaretz.csproj", "{1276CB5F-535E-4250-A8DB-49F835415962}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{69B5CC9B-642E-466F-82C2-339A387ECFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69B5CC9B-642E-466F-82C2-339A387ECFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69B5CC9B-642E-466F-82C2-339A387ECFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1276CB5F-535E-4250-A8DB-49F835415962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1276CB5F-535E-4250-A8DB-49F835415962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1276CB5F-535E-4250-A8DB-49F835415962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1276CB5F-535E-4250-A8DB-49F835415962}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
