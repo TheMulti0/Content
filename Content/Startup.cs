@@ -3,6 +3,7 @@ using Calcalist.News;
 using Calcalist.Reports;
 using Content.Api;
 using Content.Services;
+using Haaretz.News;
 using Kan.News;
 using Mako.N12Reports;
 using Mako.News;
@@ -48,6 +49,7 @@ namespace Content
             services.AddSingleton<ILatestNewsProvider, CalcalistReportsProvider>();
             services.AddSingleton<ILatestNewsProvider, WallaProvider>();
             services.AddSingleton<ILatestNewsProvider, WallaReportsProvider>();
+            services.AddSingleton<ILatestNewsProvider, HaaretzProvider>();
             
             services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();

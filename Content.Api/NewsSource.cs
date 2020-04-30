@@ -10,6 +10,7 @@
         Calcalist,
         CalcalistReports,
         Walla,
-        WallaReports
+        WallaReports,
+        Haaretz
     }
 }
