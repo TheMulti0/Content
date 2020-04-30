@@ -5,11 +5,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Calcalist.Entities;
-using Content.Api;
-using Extensions;
+using Walla.Entities;
 
-namespace Calcalist.Reports
+namespace Walla.Reports
 {
     public class CalcalistReportsProvider : ILatestNewsProvider
     {

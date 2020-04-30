@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Calcalist.Entities
+namespace Walla.Entities
 {
     [XmlRoot(ElementName="channel")]
     public class CalcalistRssChannel

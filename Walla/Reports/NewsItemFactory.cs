@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Calcalist.Entities;
-using Content.Api;
+using Walla.Entities;
 
-namespace Calcalist.Reports
+namespace Walla.Reports
 {
     public static class NewsItemFactory
     {

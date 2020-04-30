@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Calcalist.Entities
+namespace Walla.Entities
 {
     [XmlRoot(ElementName="rss")]
     public class CalcalistRssFeed

@@ -1,6 +1,4 @@
-﻿using Content.Api;
-
-namespace Calcalist.Reports
+﻿namespace Walla.Reports
 {
     public static class AuthorFactory
     {

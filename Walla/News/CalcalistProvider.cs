@@ -2,15 +2,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Content.Api;
-using Extensions;
-using Calcalist.Entities;
+using Walla.Entities;
 
-namespace Calcalist.News
+namespace Walla.News
 {
     public class CalcalistProvider : ILatestNewsProvider
     {
