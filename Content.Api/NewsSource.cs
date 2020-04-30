@@ -2,16 +2,18 @@
 {
     public enum NewsSource
     {
-        Mako,
-        MakoReporters,
-        Kan,
-        Ynet,
-        YnetReports,
         Calcalist,
         CalcalistReports,
+        Haaretz,
+        Kan,
+        Mako,
+        MakoReporters,
+        TheMarker,
         Walla,
         WallaReports,
         Haaretz,
-        N0404
+        N0404,
+        Ynet,
+        YnetReports
     }
 }

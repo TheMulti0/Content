@@ -12,6 +12,7 @@
     <ProjectReference Include="..\Kan\Kan.csproj" />
     <ProjectReference Include="..\Mako\Mako.csproj" />
     <ProjectReference Include="..\N0404\N0404.csproj" />
+    <ProjectReference Include="..\TheMarker\TheMarker.csproj" />
     <ProjectReference Include="..\Walla\Walla.csproj" />
     <ProjectReference Include="..\Ynet\Ynet.csproj" />
   </ItemGroup>

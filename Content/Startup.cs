@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using N0404.News;
+using TheMarker.News;
 using Walla.News;
 using Walla.Reports;
 using Ynet.News;
@@ -51,8 +52,9 @@ namespace Content
             services.AddSingleton<ILatestNewsProvider, WallaProvider>();
             services.AddSingleton<ILatestNewsProvider, WallaReportsProvider>();
             services.AddSingleton<ILatestNewsProvider, HaaretzProvider>();
+            services.AddSingleton<ILatestNewsProvider, TheMarkerProvider>();
             services.AddSingleton<ILatestNewsProvider, N0404Provider>();
-            
+
             services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
             services.AddSingleton<NewsService>();
