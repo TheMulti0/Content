@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TheMarker.News;
 using Walla.News;
 using Walla.Reports;
 using Ynet.News;
@@ -50,7 +51,8 @@ namespace Content
             services.AddSingleton<ILatestNewsProvider, WallaProvider>();
             services.AddSingleton<ILatestNewsProvider, WallaReportsProvider>();
             services.AddSingleton<ILatestNewsProvider, HaaretzProvider>();
-            
+            services.AddSingleton<ILatestNewsProvider, TheMarkerProvider>();
+
             services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
             services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
             services.AddSingleton<NewsService>();
