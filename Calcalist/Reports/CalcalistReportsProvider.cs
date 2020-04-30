@@ -35,14 +35,14 @@ namespace Calcalist.Reports
         public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
-                DeserializeXml<CalcalistRssFeed>(xml));
+                DeserializeXml(xml));
         }
         
-        private static T DeserializeXml<T>(Stream xml)
+        private static CalcalistRssFeed DeserializeXml (Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(CalcalistRssFeed));
             
-            return (T) serializer.Deserialize(xml);
+            return (CalcalistRssFeed) serializer.Deserialize(xml);
         }
         
         private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
