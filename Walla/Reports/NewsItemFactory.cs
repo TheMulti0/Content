@@ -11,7 +11,7 @@ namespace Walla.Reports
         private const string ContentPattern = "<\\/div>(.*)";
         private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
         
-        public static NewsItem Create(CalcalistRssItem rssItem)
+        public static NewsItem Create(WallaRssItem rssItem)
         {
             // Date example: Mon, 24 Feb 2020 09:44:00 +0200
             DateTime date = DateTime.Parse(rssItem.PublishDate);

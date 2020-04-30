@@ -3,7 +3,7 @@
 namespace Walla.Entities
 {
     [XmlRoot(ElementName = "item")]
-    public class CalcalistRssImage
+    public class WallaRssImage
     {
         [XmlElement(ElementName = "title")]
         public string Title { get; set; }

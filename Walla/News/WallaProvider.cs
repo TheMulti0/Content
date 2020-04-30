@@ -9,19 +9,19 @@ using Content.Api;
 using Extensions;
 using Walla.Entities;
 
-namespace Walla.Reports
+namespace Walla.News
 {
-    public class CalcalistReportsProvider : ILatestNewsProvider
+    public class WallaProvider : ILatestNewsProvider
     {
         private readonly RssFeedProvider _rss;
         
-        public CalcalistReportsProvider(HttpClient httpClient = null)
+        public WallaProvider(HttpClient httpClient = null)
         {
             httpClient ??= new HttpClient();
             
             _rss = new RssFeedProvider(
                 httpClient,
-                "http://www.ynet.co.il/Integration/StoryRss1854.xml");
+                "https://www.calcalist.co.il/GeneralRSS/0,16335,L-8,00.xml");
         }
         
         public Task<IEnumerable<NewsItem>> GetNews(
@@ -35,14 +35,14 @@ namespace Walla.Reports
         public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
-                DeserializeXml<CalcalistRssFeed>(xml));
+                DeserializeXml(xml));
         }
         
-        private static T DeserializeXml<T>(Stream xml)
+        private static CalcalistRssFeed DeserializeXml(Stream xml)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            
-            return (T) serializer.Deserialize(xml);
+            var serializer = new XmlSerializer(typeof(CalcalistRssFeed));
+
+            return (CalcalistRssFeed) serializer.Deserialize(xml);
         }
         
         private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)

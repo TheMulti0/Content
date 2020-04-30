@@ -3,7 +3,7 @@
 namespace Walla.Entities
 {
     [XmlRoot(ElementName="item")]
-    public class CalcalistRssItem
+    public class WallaRssItem
     {
         [XmlElement(ElementName = "category")]
         public string Category { get; set; }

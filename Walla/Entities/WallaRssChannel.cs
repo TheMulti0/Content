@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Walla.Entities
 {
     [XmlRoot(ElementName="channel")]
-    public class CalcalistRssChannel
+    public class WallaRssChannel
     {
         [XmlElement(ElementName="title")]
         public string Title { get; set; }
@@ -25,9 +25,9 @@ namespace Walla.Entities
         public string LastBuildDate { get; set; }
 
         [XmlElement(ElementName = "image")]
-        public CalcalistRssImage Image { get; set; }
+        public WallaRssImage Image { get; set; }
 
         [XmlElement(ElementName="item")]
-        public List<CalcalistRssItem> Items { get; set; }
+        public List<WallaRssItem> Items { get; set; }
     }
 }
