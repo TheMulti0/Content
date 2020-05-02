@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Calcalist.News;
 using Calcalist.Reports;
 using Content.Api;
+using Content.Models;
 using Content.Services;
 using Haaretz.News;
 using Kan.News;
@@ -43,6 +44,11 @@ namespace Content
                         .Add(
                             new JsonStringEnumConverter());
                 });
+
+            services.Configure<DatabaseSettings>(
+                Configuration.GetSection(nameof(DatabaseSettings)));
+
+            services.AddSingleton<ContentDatabase>();
 
             services.AddSingleton<ILatestNewsProvider, MakoProvider>();
             services.AddSingleton<ILatestNewsProvider, YnetProvider>();
