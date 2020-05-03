@@ -29,7 +29,8 @@ namespace Content.Controllers
             [FromQuery] int maxResults,
             [FromQuery] string excludedSources)
         {
-            return await _database.GetAsync();
+            IEnumerable<NewsItemEntity> items = (await _database.GetAsync());
+            return items.Take(10);
         }
     }
 }

@@ -58,14 +58,7 @@ namespace Content.Services
         {
             var itemInfo = new NewsItemInfo(item);
 
-            foreach (NewsItemEntity containedItem in currentNews)
-            {
-                if (itemInfo != new NewsItemInfo(containedItem))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return currentNews.Any(containedItem => itemInfo == new NewsItemInfo(containedItem));
         }
 
         public async Task<IEnumerable<NewsItem>> GetNews()
