@@ -9,13 +9,13 @@ using MongoDB.Driver;
 
 namespace Content.Services
 {
-    public class ContentDatabase
+    public class NewsMongoDatabase : INewsDatabase
     {
         private readonly IMongoCollection<NewsItemEntity> _items;
 
-        public ContentDatabase(IOptions<DatabaseSettings> options)
+        public NewsMongoDatabase(IOptions<MongoSettings> options)
         {
-            DatabaseSettings settings = options.Value;
+            var settings = options.Value;
             
             var client = new MongoClient(settings.ConnectionString);
             IMongoDatabase database = client.GetDatabase(settings.Database);
@@ -23,13 +23,14 @@ namespace Content.Services
             _items = database.GetCollection<NewsItemEntity>(settings.Collection);
         }
 
-        public Task<IAsyncCursor<NewsItemEntity>> GetAsync()
+        public Task<IEnumerable<NewsItemEntity>> GetAsync()
             => GetAsync(_ => true);
 
-        private Task<IAsyncCursor<NewsItemEntity>> GetAsync(
+        private async Task<IEnumerable<NewsItemEntity>> GetAsync(
             Expression<Func<NewsItemEntity, bool>> predicate)
         {
-            return _items.FindAsync(predicate);
+            var items = await _items.FindAsync(predicate);
+            return await items.ToListAsync();
         }
 
         public Task AddAsync(NewsItemEntity item) 
