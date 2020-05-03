@@ -1,24 +1,26 @@
 ﻿using System;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Content.Api
 {
     public class NewsItem
     {
-        public NewsSource Source { get; }
+        public NewsSource Source { get; set; }
         
-        public string Title { get; }
+        public string Title { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
         
-        public Author Author { get; }
+        public Author Author { get; set; }
 
-        public DateTime Date { get; }
+        public DateTime Date { get; set; }
 
-        public string Url { get; }
+        public string Url { get; set; }
 
-        public string ImageUrl { get; }
+        public string ImageUrl { get; set; }
 
-        public string VideoUrl { get; }
+        public string VideoUrl { get; set; }
 
         public NewsItem(
             NewsSource source,

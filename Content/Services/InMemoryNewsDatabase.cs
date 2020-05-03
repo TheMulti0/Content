@@ -38,7 +38,7 @@ namespace Content.Services
             _entities.TryRemove(CreateKey(item), out item);
         }
 
-        private static NewsItemInfo CreateKey(NewsItem item)
+        private static NewsItemInfo CreateKey(NewsItemEntity item)
             => new NewsItemInfo(item);
     }
 }

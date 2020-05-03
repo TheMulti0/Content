@@ -50,7 +50,7 @@ namespace Content.Services
         private async Task<IEnumerable<NewsItemEntity>> GetNewItems()
         {
             IEnumerable<NewsItem> news = await GetNews();
-            IEnumerable<NewsItemEntity> currentNews = await _database.GetAsync();
+            IEnumerable<NewsItem> currentNews = await _database.GetAsync();
 
             return news
                 .Where(item => !WasItemAdded(currentNews, item))
@@ -58,7 +58,7 @@ namespace Content.Services
         }
 
         private static bool WasItemAdded(
-            IEnumerable<NewsItemEntity> currentNews,
+            IEnumerable<NewsItem> currentNews,
             NewsItem item)
         {
             var itemInfo = new NewsItemInfo(item);

@@ -25,12 +25,12 @@ namespace Content.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<NewsItemEntity>> Get(
+        public async Task<IEnumerable<NewsItem>> Get(
             [FromQuery] int maxResults,
             [FromQuery] string excludedSources)
         {
             var excludedSourcesArray = DeserializeExcludedSources(excludedSources);
-            
+
             return await _database.GetAsync(maxResults, excludedSourcesArray);
         }
 
