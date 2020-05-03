@@ -41,6 +41,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N0404", "N0404\N0404.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N0404.Tests", "N0404.Tests\N0404.Tests.csproj", "{A9B2DD36-1483-49B9-8FF6-D234E2784D31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galatz", "Galatz\Galatz.csproj", "{1011AF58-45D7-495B-BF48-AF2A7AFCABF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galatz.Tests", "Galatz.Tests\Galatz.Tests.csproj", "{53E1170F-DF1F-4D4D-B5C1-9FD63C4BA87A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +127,14 @@ Global
 		{32148E3E-7513-4F6D-B9E4-D048536B7F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32148E3E-7513-4F6D-B9E4-D048536B7F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32148E3E-7513-4F6D-B9E4-D048536B7F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1011AF58-45D7-495B-BF48-AF2A7AFCABF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1011AF58-45D7-495B-BF48-AF2A7AFCABF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1011AF58-45D7-495B-BF48-AF2A7AFCABF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1011AF58-45D7-495B-BF48-AF2A7AFCABF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E1170F-DF1F-4D4D-B5C1-9FD63C4BA87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E1170F-DF1F-4D4D-B5C1-9FD63C4BA87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E1170F-DF1F-4D4D-B5C1-9FD63C4BA87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E1170F-DF1F-4D4D-B5C1-9FD63C4BA87A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
