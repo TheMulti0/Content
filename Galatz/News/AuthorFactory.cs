@@ -10,7 +10,7 @@ namespace Galatz.News
         {
             Talent firstTalent = hashtag.Talents.FirstOrDefault();
             
-            string name = firstTalent?.Name ?? seo.Title;
+            string name = firstTalent?.Name ?? "גל\"צ";
             string imageUrl = firstTalent?.Img ?? seo.Image;
             
             return new Author(

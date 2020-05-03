@@ -9,7 +9,7 @@ namespace Galatz.News
         public static NewsItem Create(Hashtag hashtag, Seo seo)
         {
             return new NewsItem(
-                NewsSource.Calcalist,
+                NewsSource.Galatz,
                 hashtag._Hashtag,
                 null,
                 AuthorFactory.Create(hashtag, seo),
