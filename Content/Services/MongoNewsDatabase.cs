@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Content.Api;
 using Content.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -23,14 +24,23 @@ namespace Content.Services
             _items = database.GetCollection<NewsItemEntity>(settings.Collection);
         }
 
-        public Task<IEnumerable<NewsItemEntity>> GetAsync()
-            => GetAsync(_ => true);
-
-        private async Task<IEnumerable<NewsItemEntity>> GetAsync(
-            Expression<Func<NewsItemEntity, bool>> predicate)
+        public async Task<IEnumerable<NewsItemEntity>> GetAsync()
         {
-            var items = await _items.FindAsync(predicate);
-            return await items.ToListAsync();
+            IAsyncCursor<NewsItemEntity> cursor = await _items.FindAsync(_ => true);
+            return await cursor.ToListAsync();
+        }
+
+        public async Task<IEnumerable<NewsItemEntity>> GetAsync(int maxResults, NewsSource[] excludedSources)
+        {
+            IAsyncCursor<NewsItemEntity> cursor = await _items
+                .FindAsync(
+                    item => excludedSources.All(source => item.Source != source),
+                    new FindOptions<NewsItemEntity>
+                    {
+                        Limit = maxResults
+                    });
+            
+            return await cursor.ToListAsync();
         }
 
         public Task AddAsync(NewsItemEntity item) 

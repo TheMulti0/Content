@@ -29,8 +29,22 @@ namespace Content.Controllers
             [FromQuery] int maxResults,
             [FromQuery] string excludedSources)
         {
-            IEnumerable<NewsItemEntity> items = (await _database.GetAsync());
-            return items.Take(10);
+            var excludedSourcesArray = DeserializeExcludedSources(excludedSources);
+            
+            return await _database.GetAsync(maxResults, excludedSourcesArray);
+        }
+
+        private static NewsSource[] DeserializeExcludedSources(string excludedSources)
+        {
+            return JsonSerializer.Deserialize<NewsSource[]>(
+                excludedSources,
+                new JsonSerializerOptions
+                {
+                    Converters =
+                    {
+                        new JsonStringEnumConverter()
+                    }
+                });
         }
     }
 }
