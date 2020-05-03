@@ -1,40 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Api;
 using Content.Models;
+using Microsoft.Extensions.Options;
 
 namespace Content.Services
 {
     public class NewsService
     {
+        private readonly NewsSettings _settings;
         private readonly INewsDatabase _database;
         private readonly ILatestNewsProvider[] _latestNewsProviders;
         private readonly IPagedNewsProvider[] _pagedNewsProviders;
 
         public NewsService(
+            IOptions<NewsSettings> settings,
             INewsDatabase database,
             IEnumerable<ILatestNewsProvider> latestNewsProviders,
             IEnumerable<IPagedNewsProvider> pagedNewsProviders)
         {
+            _settings = settings.Value;
             _database = database;
             _latestNewsProviders = latestNewsProviders.ToArray();
             _pagedNewsProviders = pagedNewsProviders.ToArray();
             
-            Update();
+            StartUpdating(CancellationToken.None);
         }
 
-        private void Update()
+        public void StartUpdating(CancellationToken token)
         {
-            Task.Run(UpdateDatabase);
+            Task.Run(UpdateDatabase, token);
         }
 
         private async Task UpdateDatabase()
         {
             while (true)
             {
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                await Task.Delay(TimeSpan.FromSeconds(_settings.NewsUpdateSecondsInterval));
 
                 IEnumerable<NewsItemEntity> newItems = await GetNewItems();
 
