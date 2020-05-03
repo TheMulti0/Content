@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Calcalist.News;
 using Calcalist.Reports;
 using Content.Api;
+using Content.Models;
 using Content.Services;
 using Haaretz.News;
 using Kan.News;
@@ -33,32 +34,23 @@ namespace Content
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddControllers()
-                .AddJsonOptions(options =>
+            services.AddControllers().AddJsonOptions(options =>
                 {
-                    options
-                        .JsonSerializerOptions
-                        .Converters
-                        .Add(
-                            new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.Converters
+                        .Add(new JsonStringEnumConverter());
                 });
 
-            services.AddSingleton<ILatestNewsProvider, MakoProvider>();
-            services.AddSingleton<ILatestNewsProvider, YnetProvider>();
-            services.AddSingleton<ILatestNewsProvider, YnetReportsProvider>();
-            services.AddSingleton<ILatestNewsProvider, CalcalistProvider>();
-            services.AddSingleton<ILatestNewsProvider, CalcalistReportsProvider>();
-            services.AddSingleton<ILatestNewsProvider, WallaProvider>();
-            services.AddSingleton<ILatestNewsProvider, WallaReportsProvider>();
-            services.AddSingleton<ILatestNewsProvider, HaaretzProvider>();
-            services.AddSingleton<ILatestNewsProvider, TheMarkerProvider>();
-            services.AddSingleton<ILatestNewsProvider, N0404Provider>();
+            RegisterDatabase(services);
 
-            services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
-            services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
-            services.AddSingleton<NewsService>();
+            RegisterLatestProviders(services);
+
+            RegisterPagedProviders(services);
             
+            services.Configure<NewsSettings>(
+                Configuration.GetSection(nameof(NewsSettings)));
+
+            services.AddSingleton<NewsService>();
+
             services.AddCors(
                 options =>
                 {
@@ -71,6 +63,42 @@ namespace Content
                                 .AllowAnyHeader();
                         });
                 });
+        }
+
+        private void RegisterDatabase(IServiceCollection services)
+        {
+            var dbSettings = Configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
+            if (dbSettings.UseInMemoryDatabase)
+            {
+                services.AddSingleton<INewsDatabase, InMemoryNewsDatabase>();
+            }
+            else
+            {
+                services.Configure<MongoSettings>(
+                    Configuration.GetSection(nameof(MongoSettings)));
+
+                services.AddSingleton<INewsDatabase, MongoNewsDatabase>();
+            }
+        }
+
+        private static void RegisterLatestProviders(IServiceCollection services)
+        {
+            services.AddSingleton<ILatestNewsProvider, MakoProvider>();
+            services.AddSingleton<ILatestNewsProvider, YnetProvider>();
+            services.AddSingleton<ILatestNewsProvider, YnetReportsProvider>();
+            services.AddSingleton<ILatestNewsProvider, CalcalistProvider>();
+            services.AddSingleton<ILatestNewsProvider, CalcalistReportsProvider>();
+            services.AddSingleton<ILatestNewsProvider, WallaProvider>();
+            services.AddSingleton<ILatestNewsProvider, WallaReportsProvider>();
+            services.AddSingleton<ILatestNewsProvider, HaaretzProvider>();
+            services.AddSingleton<ILatestNewsProvider, TheMarkerProvider>();
+            services.AddSingleton<ILatestNewsProvider, N0404Provider>();
+        }
+
+        private static void RegisterPagedProviders(IServiceCollection services)
+        {
+            services.AddSingleton<IPagedNewsProvider, N12ReportsProvider>();
+            services.AddSingleton<IPagedNewsProvider, KanNewsProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,7 +114,7 @@ namespace Content
             app.UseRouting();
 
             app.UseCors();
-
+            
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
