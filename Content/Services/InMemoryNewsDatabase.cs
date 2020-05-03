@@ -8,7 +8,7 @@ namespace Content.Services
 {
     public class InMemoryNewsDatabase : INewsDatabase
     {
-        private readonly ConcurrentDictionary<InMemoryKey, NewsItemEntity> _entities = new ConcurrentDictionary<InMemoryKey, NewsItemEntity>();
+        private readonly ConcurrentDictionary<NewsItemInfo, NewsItemEntity> _entities = new ConcurrentDictionary<NewsItemInfo, NewsItemEntity>();
         
         public async Task<IEnumerable<NewsItemEntity>> GetAsync() => _entities.Values;
 
@@ -30,7 +30,7 @@ namespace Content.Services
             _entities.TryRemove(CreateKey(item), out item);
         }
 
-        private static InMemoryKey CreateKey(NewsItem item)
-            => new InMemoryKey(item);
+        private static NewsItemInfo CreateKey(NewsItem item)
+            => new NewsItemInfo(item);
     }
 }

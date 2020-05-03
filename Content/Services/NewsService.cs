@@ -3,51 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Api;
+using Content.Models;
 
 namespace Content.Services
 {
     public class NewsService
     {
+        private readonly INewsDatabase _database;
         private readonly ILatestNewsProvider[] _latestNewsProviders;
         private readonly IPagedNewsProvider[] _pagedNewsProviders;
 
         public NewsService(
+            INewsDatabase database,
             IEnumerable<ILatestNewsProvider> latestNewsProviders,
             IEnumerable<IPagedNewsProvider> pagedNewsProviders)
         {
+            _database = database;
             _latestNewsProviders = latestNewsProviders.ToArray();
             _pagedNewsProviders = pagedNewsProviders.ToArray();
-        }
-
-        public async Task<IEnumerable<NewsItem>> GetNews(
-            int maxResults,
-            NewsSource[] excludedSources)
-        {
-            ILatestNewsProvider[] latestProviders = GetCorrectProviders(
-                 _latestNewsProviders,
-                 excludedSources,
-                 provider => provider.GetProviderType());
             
-            IPagedNewsProvider[] pagedProviders = GetCorrectProviders(
-                _pagedNewsProviders,
-                 excludedSources,
-                 provider => provider.GetProviderType());
-
-
-            return await GetAllItems(maxResults, latestProviders, pagedProviders);
+            Update();
         }
 
-        private static async Task<IEnumerable<NewsItem>> GetAllItems(
-            int maxResults,
-            IEnumerable<ILatestNewsProvider> latestProviders,
-            IEnumerable<IPagedNewsProvider> pagedProviders)
+        private void Update()
+        {
+            Task.Run(UpdateDatabase);
+        }
+
+        private async Task UpdateDatabase()
+        {
+            while (true)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(5));
+
+                IEnumerable<NewsItemEntity> newItems = await GetNewItems();
+
+                await _database.AddRangeAsync(newItems);
+            }
+        }
+
+        private async Task<IEnumerable<NewsItemEntity>> GetNewItems()
+        {
+            IEnumerable<NewsItem> news = await GetNews();
+            IEnumerable<NewsItemEntity> currentNews = await _database.GetAsync();
+
+            return news
+                .Where(item => !WasItemAdded(currentNews, item))
+                .Select(item => new NewsItemEntity(item));
+        }
+
+        private static bool WasItemAdded(
+            IEnumerable<NewsItemEntity> currentNews,
+            NewsItem item)
+        {
+            var itemInfo = new NewsItemInfo(item);
+
+            foreach (NewsItemEntity containedItem in currentNews)
+            {
+                if (itemInfo != new NewsItemInfo(containedItem))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<IEnumerable<NewsItem>> GetNews()
         {
             IEnumerable<NewsItem> orderedItems = OrderItems(
-                await GetAllItems(latestProviders, pagedProviders));
+                await GetAllItems(_latestNewsProviders, _pagedNewsProviders));
 
-            return maxResults < 1
-                ? orderedItems
-                : orderedItems.Take(maxResults);
+            return orderedItems;
         }
 
         private static async Task<List<NewsItem>> GetAllItems(
@@ -68,35 +94,10 @@ namespace Content.Services
             return items;
         }
 
-        private static IEnumerable<NewsItem> OrderItems(List<NewsItem> items)
+        private static IEnumerable<NewsItem> OrderItems(IEnumerable<NewsItem> items)
         {
             return items
                 .OrderByDescending(item => item.Date);
-        }
-
-        private static T[] GetCorrectProviders<T>(
-            T[] providers,
-            NewsSource[] excludedSources,
-            Func<T, NewsSource?> getProviderType)
-        {
-            bool IsExcluded(KeyValuePair<T, NewsSource> kv) 
-                => !excludedSources.Contains(kv.Value);
-            
-            if (excludedSources.Any())
-            {
-                return providers
-                    .ToDictionary(
-                        provider => provider,
-                        getProviderType) // KeyValuePair<T, NewsProviderType?>
-                    .Where(kv => kv.Value != null) // Filter out the nullable instances
-                    .ToDictionary(
-                        kv => kv.Key,
-                        kv => (NewsSource) kv.Value) // Will not throw an exception, since the nullable instances have been filtered out
-                    .Where(IsExcluded)
-                    .Select(kv => kv.Key)
-                    .ToArray();
-            }
-            return providers;
         }
     }
 }

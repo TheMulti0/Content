@@ -22,15 +22,6 @@ namespace Content.Controllers
         {
             _news = news;
             _database = database;
-            IEnumerable<NewsItem> newsItems = news.GetNews(
-                10,
-                new NewsSource[0]).Result;
-
-            IEnumerable<NewsItemEntity> entities = newsItems.Select(item => new NewsItemEntity(item));
-            
-            database.AddRangeAsync(entities).Wait();
-
-            database.RemoveAsync(entities.First());
         }
 
         [HttpGet]
@@ -39,16 +30,6 @@ namespace Content.Controllers
             [FromQuery] string excludedSources)
         {
             return await _database.GetAsync();
-            // NewsSource[] excludedSourcesArray = JsonSerializer.Deserialize<NewsSource[]>(
-            //     excludedSources,
-            //     new JsonSerializerOptions
-            //     {
-            //         Converters = { new JsonStringEnumConverter() }
-            //     });
-            //
-            // return _news.GetNews(
-            //     maxResults,
-            //     excludedSourcesArray);
         }
     }
 }

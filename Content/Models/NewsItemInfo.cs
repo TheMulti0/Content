@@ -3,7 +3,7 @@ using Content.Api;
 
 namespace Content.Models
 {
-    internal class InMemoryKey : IEquatable<InMemoryKey>
+    internal class NewsItemInfo : IEquatable<NewsItemInfo>
     {
         public string Title { get; set; }
         
@@ -11,14 +11,14 @@ namespace Content.Models
         
         public DateTime Date { get; }
 
-        public InMemoryKey(NewsItem item)
+        public NewsItemInfo(NewsItem item)
         {
             Title = item.Title;
             Source = item.Source;
             Date = item.Date;
         }
 
-        public bool Equals(InMemoryKey other)
+        public bool Equals(NewsItemInfo other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -47,13 +47,13 @@ namespace Content.Models
             {
                 return false;
             }
-            return Equals((InMemoryKey) obj);
+            return Equals((NewsItemInfo) obj);
         }
 
         public override int GetHashCode() => HashCode.Combine(Title, (int) Source, Date);
 
-        public static bool operator ==(InMemoryKey left, InMemoryKey right) => Equals(left, right);
+        public static bool operator ==(NewsItemInfo left, NewsItemInfo right) => Equals(left, right);
 
-        public static bool operator !=(InMemoryKey left, InMemoryKey right) => !Equals(left, right);
+        public static bool operator !=(NewsItemInfo left, NewsItemInfo right) => !Equals(left, right);
     }
 }
