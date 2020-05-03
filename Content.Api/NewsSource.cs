@@ -4,6 +4,7 @@
     {
         Calcalist,
         CalcalistReports,
+        Galatz,
         Haaretz,
         Kan,
         Mako,
