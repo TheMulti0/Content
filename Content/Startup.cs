@@ -86,14 +86,14 @@ namespace Content
             var dbSettings = Configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
             if (dbSettings.UseInMemoryDatabase)
             {
-                services.AddSingleton<INewsDatabase, NewsInMemoryDatabase>();
+                services.AddSingleton<INewsDatabase, InMemoryNewsDatabase>();
             }
             else
             {
                 services.Configure<MongoSettings>(
                     Configuration.GetSection(nameof(MongoSettings)));
 
-                services.AddSingleton<INewsDatabase, NewsMongoDatabase>();
+                services.AddSingleton<INewsDatabase, MongoNewsDatabase>();
             }
         }
 

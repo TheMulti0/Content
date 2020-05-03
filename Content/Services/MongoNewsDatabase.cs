@@ -9,11 +9,11 @@ using MongoDB.Driver;
 
 namespace Content.Services
 {
-    public class NewsMongoDatabase : INewsDatabase
+    public class MongoNewsDatabase : INewsDatabase
     {
         private readonly IMongoCollection<NewsItemEntity> _items;
 
-        public NewsMongoDatabase(IOptions<MongoSettings> options)
+        public MongoNewsDatabase(IOptions<MongoSettings> options)
         {
             var settings = options.Value;
             

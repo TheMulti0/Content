@@ -6,7 +6,7 @@ using Content.Models;
 
 namespace Content.Services
 {
-    public class NewsInMemoryDatabase : INewsDatabase
+    public class InMemoryNewsDatabase : INewsDatabase
     {
         private readonly ConcurrentDictionary<InMemoryKey, NewsItemEntity> _entities = new ConcurrentDictionary<InMemoryKey, NewsItemEntity>();
         
