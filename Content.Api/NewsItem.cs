@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Content.Api
 {
-    public class NewsItem
+    public class NewsItem : INewsItem
     {
         public NewsSource Source { get; set; }
         

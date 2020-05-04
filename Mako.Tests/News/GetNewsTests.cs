@@ -14,7 +14,7 @@ namespace Mako.Tests.News
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new MakoProvider().GetNews()).ToList();
+            List<INewsItem> items = (await new MakoProvider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }

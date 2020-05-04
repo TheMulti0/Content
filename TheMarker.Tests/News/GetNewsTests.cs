@@ -14,7 +14,7 @@ namespace TheMarker.Tests.News
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new TheMarkerProvider().GetNews()).ToList();
+            List<INewsItem> items = (await new TheMarkerProvider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }

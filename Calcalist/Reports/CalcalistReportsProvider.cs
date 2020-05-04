@@ -24,7 +24,7 @@ namespace Calcalist.Reports
                 "http://www.ynet.co.il/Integration/StoryRss1854.xml");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -32,7 +32,7 @@ namespace Calcalist.Reports
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml(xml));
@@ -45,7 +45,7 @@ namespace Calcalist.Reports
             return (CalcalistRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(CalcalistRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

@@ -25,7 +25,7 @@ namespace Calcalist.News
                 "https://www.calcalist.co.il/GeneralRSS/0,16335,L-8,00.xml");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -33,7 +33,7 @@ namespace Calcalist.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml(xml));
@@ -46,7 +46,7 @@ namespace Calcalist.News
             return (CalcalistRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(CalcalistRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(CalcalistRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

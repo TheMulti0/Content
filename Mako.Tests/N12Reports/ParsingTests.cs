@@ -19,9 +19,9 @@ namespace Mako.Tests.N12Reports
         public async Task TestItemsParsing()
         {
             var feed = await DeserializeJson("reporters1.json");
-            IEnumerable<NewsItem> items = feed.Select(NewsItemFactory.Create);
+            IEnumerable<INewsItem> items = feed.Select(NewsItemFactory.Create);
             
-            foreach (NewsItem item in items)
+            foreach (INewsItem item in items)
             {
                 AssertNewsItem(item);
             }
@@ -37,7 +37,7 @@ namespace Mako.Tests.N12Reports
             return File.OpenRead($"{ProjectRoot}/{fileName}");
         }
 
-        private static void AssertNewsItem(NewsItem item)
+        private static void AssertNewsItem(INewsItem item)
         {
             // Some of these properties can never be null,
             // they are accessed in order to throw a NullReferenceException,

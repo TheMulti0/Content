@@ -15,7 +15,7 @@ namespace Calcalist.Tests.Reports
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new CalcalistReportsProvider().GetNews()).ToList();
+            List<INewsItem> items = (await new CalcalistReportsProvider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }

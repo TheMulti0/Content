@@ -9,7 +9,7 @@ namespace Kan.News
 {
     public static class NewsItemFactory
     {
-        public static NewsItem Create(HtmlNode item)
+        public static INewsItem Create(HtmlNode item)
         {
             HtmlNode infoBlock = item.LastElementOrDefault("div");
             HtmlNode contentInfo = infoBlock.FirstOrDefault(node => node.HasClass("program_list_link") && node.HasClass("w-inline-block"));

@@ -6,7 +6,7 @@ namespace Content.Api
 {
     public interface ILatestNewsProvider
     {
-        Task<IEnumerable<NewsItem>> GetNews(
+        Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default);
     }
 }

@@ -10,7 +10,7 @@ namespace Content.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         
-        public NewsItemEntity(NewsItem item) : base(
+        public NewsItemEntity(INewsItem item) : base(
             item.Source,
             item.Title,
             item.Description,

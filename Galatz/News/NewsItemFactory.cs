@@ -10,7 +10,7 @@ namespace Galatz.News
     {
         private const string TimePattern = "[0-9]{4}";
         
-        public static NewsItem Create(Hashtag hashtag, Seo seo)
+        public static INewsItem Create(Hashtag hashtag, Seo seo)
         {
             var fullDate = DateTime.Parse(GetFullDate(hashtag));
 

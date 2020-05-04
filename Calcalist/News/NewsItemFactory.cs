@@ -11,7 +11,7 @@ namespace Calcalist.News
         private const string ContentPattern = "<\\/div>(.*)";
         private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
         
-        public static NewsItem Create(CalcalistRssItem rssItem)
+        public static INewsItem Create(CalcalistRssItem rssItem)
         {
             string description = Regex.Match(rssItem.Description, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;

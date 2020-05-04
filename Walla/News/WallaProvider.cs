@@ -24,7 +24,7 @@ namespace Walla.News
                 "https://rss.walla.co.il/feed/1?type=main");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -32,7 +32,7 @@ namespace Walla.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml(xml));
@@ -45,7 +45,7 @@ namespace Walla.News
             return (WallaRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(WallaRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(WallaRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

@@ -16,11 +16,11 @@ namespace Galatz.Tests.News
         [Fact]
         public async Task TestItemsParsing()
         {
-            IEnumerable<NewsItem> items = await GalatzProvider.DeserializeItems(
+            IEnumerable<INewsItem> items = await GalatzProvider.DeserializeItems(
                 ReadJson("news1.json"),
                 CancellationToken.None);
             
-            foreach (NewsItem item in items)
+            foreach (INewsItem item in items)
             {
                 AssertNewsItem(item);
             }
@@ -31,7 +31,7 @@ namespace Galatz.Tests.News
             return File.OpenRead($"{ProjectRoot}/{fileName}");
         }
 
-        private static void AssertNewsItem(NewsItem item)
+        private static void AssertNewsItem(INewsItem item)
         {
             // Some of these properties can never be null,
             // they are accessed in order to throw a NullReferenceException,

@@ -7,7 +7,7 @@ namespace Mako.News
 {
     public static class NewsItemFactory
     {
-        public static NewsItem Create(MakoRssItem rssItem)
+        public static INewsItem Create(MakoRssItem rssItem)
         {
             // Date example: Mon, 24 Feb 2020 09:44:00 +0200
 

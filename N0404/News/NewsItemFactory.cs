@@ -11,7 +11,7 @@ namespace N0404.News
     {
         private const string ContentPattern = "<p>(.*)<\\/p><a";
         
-        public static NewsItem Create(N0404RssItem rssItem)
+        public static INewsItem Create(N0404RssItem rssItem)
         {
             string description = Regex.Match(rssItem.Encoded, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
             

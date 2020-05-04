@@ -25,7 +25,7 @@ namespace TheMarker.News
                 "https://www.themarker.com/cmlink/1.144");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -33,7 +33,7 @@ namespace TheMarker.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml(xml));
@@ -46,7 +46,7 @@ namespace TheMarker.News
             return (TheMarkerRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(TheMarkerRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(TheMarkerRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

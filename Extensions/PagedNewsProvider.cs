@@ -9,20 +9,20 @@ namespace Extensions
 {
     public static class PagedNewsProvider
     {
-        public static async Task<IEnumerable<NewsItem>> GetNews(
+        public static async Task<IEnumerable<INewsItem>> GetNews(
             int maxResults,
             int maxItemsPerPage,
-            Func<int, CancellationToken, Task<IEnumerable<NewsItem>>> getItems,
+            Func<int, CancellationToken, Task<IEnumerable<INewsItem>>> getItems,
             int firstPage,
             CancellationToken cancellationToken )
         {
             int remainingItemsCount = maxResults;
 
-            var totalItems = new List<NewsItem>();
+            var totalItems = new List<INewsItem>();
             
             for (int pageIndex = firstPage + 1; remainingItemsCount > 0; pageIndex++)
             {
-                IEnumerable<NewsItem> items = await getItems(
+                IEnumerable<INewsItem> items = await getItems(
                     pageIndex,
                     cancellationToken);
                 var itemsList = items.ToList();
