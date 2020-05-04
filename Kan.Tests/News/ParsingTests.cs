@@ -16,11 +16,11 @@ namespace Kan.Tests.News
         public void TestItemsParsing()
         {
             string html = ReadHtmlText("newsitems.html");
-            IEnumerable<NewsItem> items = KanNewsProvider.ParseItems(html);
+            IEnumerable<INewsItem> items = KanNewsProvider.ParseItems(html);
             
             Assert.NotNull(items);
             
-            foreach (NewsItem item in items)
+            foreach (INewsItem item in items)
             {
                 AssertNewsItem(item);
                 Assert.NotNull(item.Url);
@@ -36,10 +36,10 @@ namespace Kan.Tests.News
         [Fact]
         public void TestItemParsing3() => TestItemParsing("newsitem3.html");
         
-        private static NewsItem TestItemParsing(string fileName)
+        private static INewsItem TestItemParsing(string fileName)
         {
             HtmlNode newsItemNode = ReadHtml(fileName);
-            NewsItem item = NewsItemFactory.Create(newsItemNode);
+            INewsItem item = NewsItemFactory.Create(newsItemNode);
             AssertNewsItem(item);
 
             return item;
@@ -56,7 +56,7 @@ namespace Kan.Tests.News
             return File.ReadAllText($"{ProjectRoot}/{fileName}");
         }
 
-        private static void AssertNewsItem(NewsItem item)
+        private static void AssertNewsItem(INewsItem item)
         {
             // Some of these properties can never be null,
             // they are accessed in order to throw a NullReferenceException,

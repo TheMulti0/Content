@@ -19,7 +19,7 @@ namespace Galatz.News
             _client = client ?? new HttpClient();
         }
 
-        public async Task<IEnumerable<NewsItem>> GetNews(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<INewsItem>> GetNews(CancellationToken cancellationToken = default)
         {
             HttpResponseMessage response = await _client.GetAsync(
                 GalatzConstants.ToAbsoluteUrl("/umbraco/api/home/GetHomePageData?rootId=1051"),
@@ -30,7 +30,7 @@ namespace Galatz.News
             return await DeserializeItems(json, cancellationToken);
         }
 
-        public static async Task<IEnumerable<NewsItem>> DeserializeItems(
+        public static async Task<IEnumerable<INewsItem>> DeserializeItems(
             Stream json,
             CancellationToken cancellationToken)
         {

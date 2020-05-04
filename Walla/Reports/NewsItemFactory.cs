@@ -10,7 +10,7 @@ namespace Walla.Reports
     {
         private const string ContentPattern = "<br\\/>(.*)<\\/p";
         
-        public static NewsItem Create(WallaRssItem rssItem)
+        public static INewsItem Create(WallaRssItem rssItem)
         {
             string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
             

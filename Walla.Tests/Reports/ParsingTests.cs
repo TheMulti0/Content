@@ -14,9 +14,9 @@ namespace Walla.Tests.Reports
         [Fact]
         public void TestItemsParsing()
         {
-            IEnumerable<NewsItem> items = WallaReportsProvider.DeserializeItems(ReadXml("reports1.xml"));
+            IEnumerable<INewsItem> items = WallaReportsProvider.DeserializeItems(ReadXml("reports1.xml"));
             
-            foreach (NewsItem item in items)
+            foreach (INewsItem item in items)
             {
                 AssertNewsItem(item);
             }
@@ -27,7 +27,7 @@ namespace Walla.Tests.Reports
             return File.OpenRead($"{ProjectRoot}/{fileName}");
         }
 
-        private static void AssertNewsItem(NewsItem item)
+        private static void AssertNewsItem(INewsItem item)
         {
             // Some of these properties can never be null,
             // they are accessed in order to throw a NullReferenceException,

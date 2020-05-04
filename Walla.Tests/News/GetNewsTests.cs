@@ -14,7 +14,7 @@ namespace Walla.Tests.News
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new WallaProvider().GetNews()).ToList();
+            List<INewsItem> items = (await new WallaProvider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }

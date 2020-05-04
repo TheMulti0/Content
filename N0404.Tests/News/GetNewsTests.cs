@@ -15,7 +15,7 @@ namespace N0404.Tests.News
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new N0404Provider().GetNews()).ToList();
+            List<INewsItem> items = (await new N0404Provider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }

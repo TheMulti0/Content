@@ -14,7 +14,7 @@ namespace Ynet.Tests.Reports
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new YnetReportsProvider().GetNews()).ToList();
+            List<INewsItem> items = (await new YnetReportsProvider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }

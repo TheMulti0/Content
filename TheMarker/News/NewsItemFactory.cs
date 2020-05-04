@@ -10,7 +10,7 @@ namespace TheMarker.News
     {
         private const string ContentPattern = "<\\/div>(.*)";
         
-        public static NewsItem Create(TheMarkerRssItem rssItem)
+        public static INewsItem Create(TheMarkerRssItem rssItem)
         {
             string description = Regex.Match(rssItem.Description, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
             

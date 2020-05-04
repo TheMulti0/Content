@@ -9,7 +9,7 @@ namespace Mako.N12Reports
     {
         private static DateTime _unixEpoch = new DateTime(1970, 1, 1);
 
-        public static NewsItem Create(Report message)
+        public static INewsItem Create(Report message)
         {
             return new NewsItem(
                 NewsSource.MakoReporters,

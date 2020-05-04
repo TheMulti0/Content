@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Content.Api;
 
 namespace Extensions
@@ -23,9 +22,9 @@ namespace Extensions
             _rssFeed = rssFeed;
         }
         
-        public async Task<IEnumerable<NewsItem>> GetNews(
+        public async Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken,
-            Func<Stream, IEnumerable<NewsItem>> deserializeItems)
+            Func<Stream, IEnumerable<INewsItem>> deserializeItems)
         {
             Stream xml = await GetXmlAsync(cancellationToken);
 

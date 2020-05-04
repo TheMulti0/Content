@@ -11,7 +11,7 @@ namespace Ynet.Reports
         private const string ContentPattern = "<\\/div>(.*)";
         private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
         
-        public static NewsItem Create(YnetRssItem rssItem)
+        public static INewsItem Create(YnetRssItem rssItem)
         {
             string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
             string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;

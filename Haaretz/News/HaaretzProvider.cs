@@ -24,7 +24,7 @@ namespace Haaretz.News
                 "https://www.haaretz.co.il/cmlink/1.1617539");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -32,7 +32,7 @@ namespace Haaretz.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml(xml));
@@ -45,7 +45,7 @@ namespace Haaretz.News
             return (HaaretzRssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(HaaretzRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(HaaretzRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

@@ -25,7 +25,7 @@ namespace Ynet.News
                 "http://www.ynet.co.il/Integration/StoryRss2.xml");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -33,7 +33,7 @@ namespace Ynet.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml<YnetRssFeed>(xml));
@@ -52,7 +52,7 @@ namespace Ynet.News
             return (T) serializer.Deserialize(stream);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(YnetRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(YnetRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

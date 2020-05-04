@@ -25,7 +25,7 @@ namespace Mako.News
                 "http://rcs.mako.co.il/rss/31750a2610f26110VgnVCM1000005201000aRCRD.xml");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -33,7 +33,7 @@ namespace Mako.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml<MakoRssFeed>(xml));
@@ -52,7 +52,7 @@ namespace Mako.News
             return (T) serializer.Deserialize(stream);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(MakoRssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(MakoRssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

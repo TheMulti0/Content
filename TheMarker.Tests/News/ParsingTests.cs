@@ -14,9 +14,9 @@ namespace TheMarker.Tests.News
         [Fact]
         public void TestItemsParsing()
         {
-            IEnumerable<NewsItem> items = TheMarkerProvider.DeserializeItems(ReadXml("news1.xml"));
+            IEnumerable<INewsItem> items = TheMarkerProvider.DeserializeItems(ReadXml("news1.xml"));
             
-            foreach (NewsItem item in items)
+            foreach (INewsItem item in items)
             {
                 AssertNewsItem(item);
             }
@@ -27,7 +27,7 @@ namespace TheMarker.Tests.News
             return File.OpenRead($"{ProjectRoot}/{fileName}");
         }
 
-        private static void AssertNewsItem(NewsItem item)
+        private static void AssertNewsItem(INewsItem item)
         {
             // Some of these properties can never be null,
             // they are accessed in order to throw a NullReferenceException,

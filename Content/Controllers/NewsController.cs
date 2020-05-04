@@ -25,7 +25,7 @@ namespace Content.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<NewsItem>> Get(
+        public async Task<IEnumerable<INewsItem>> Get(
             [FromQuery] int maxResults,
             [FromQuery] string excludedSources)
         {

@@ -14,7 +14,7 @@ namespace Haaretz.Tests.News
         [Fact]
         public async Task Test()
         {
-            List<NewsItem> items = (await new HaaretzProvider().GetNews()).ToList();
+            List<INewsItem> items = (await new HaaretzProvider().GetNews()).ToList();
 
             Assert.True(items.Any());
         }
@@ -31,7 +31,7 @@ namespace Haaretz.Tests.News
                     try
                     {
                         var provider = new HaaretzProvider();
-                        var items = provider
+                        List<INewsItem> items = provider
                             .GetNews(cts.Token)
                             .Result
                             .ToList();

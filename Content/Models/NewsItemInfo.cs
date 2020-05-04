@@ -5,13 +5,13 @@ namespace Content.Models
 {
     internal class NewsItemInfo : IEquatable<NewsItemInfo>
     {
-        public string Title { get; set; }
+        public string Title { get; }
         
         public NewsSource Source { get; }
         
         public DateTime Date { get; }
 
-        public NewsItemInfo(NewsItem item)
+        public NewsItemInfo(INewsItem item)
         {
             Title = item.Title;
             Source = item.Source;

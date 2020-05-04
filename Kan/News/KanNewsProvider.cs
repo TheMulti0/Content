@@ -24,7 +24,7 @@ namespace Kan.News
 
         public int MaximumItemsPerPage { get; } = 9;
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             int maxResults,
             int firstPage = 0,
             CancellationToken cancellationToken = default)
@@ -37,7 +37,7 @@ namespace Kan.News
                 cancellationToken);
         }
         
-        private async Task<IEnumerable<NewsItem>> GetItems(int page, CancellationToken token)
+        private async Task<IEnumerable<INewsItem>> GetItems(int page, CancellationToken token)
         {
             HttpResponseMessage response = await _client.GetAsync($"/program/getMoreProgramNews.aspx?count={page}", token);
             string html = await response.Content.ReadAsStringAsync();
@@ -45,7 +45,7 @@ namespace Kan.News
             return ParseItems(html);
         }
 
-        public static IEnumerable<NewsItem> ParseItems(string html)
+        public static IEnumerable<INewsItem> ParseItems(string html)
         {
             var doc = new HtmlDocument();
             doc.LoadHtml(html);

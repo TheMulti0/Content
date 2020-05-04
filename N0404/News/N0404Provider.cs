@@ -24,7 +24,7 @@ namespace N0404.News
                 "https://www.0404.co.il/?call_custom_simple_rss=1&csrp_cat=14");
         }
         
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             CancellationToken cancellationToken = default)
         {
             return _rss.GetNews(
@@ -32,7 +32,7 @@ namespace N0404.News
                 DeserializeItems);
         }
 
-        public static IEnumerable<NewsItem> DeserializeItems(Stream xml)
+        public static IEnumerable<INewsItem> DeserializeItems(Stream xml)
         {
             return ToNewsItems(
                 DeserializeXml(xml));
@@ -45,7 +45,7 @@ namespace N0404.News
             return (N0404RssFeed) serializer.Deserialize(xml);
         }
         
-        private static IEnumerable<NewsItem> ToNewsItems(N0404RssFeed feed)
+        private static IEnumerable<INewsItem> ToNewsItems(N0404RssFeed feed)
         {
             return feed.Channel.Items
                 .Select(NewsItemFactory.Create);

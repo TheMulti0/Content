@@ -6,7 +6,7 @@ namespace Haaretz.News
 {
     public static class NewsItemFactory
     {
-        public static NewsItem Create(HaaretzRssItem rssItem)
+        public static INewsItem Create(HaaretzRssItem rssItem)
         {
             return new NewsItem(
                 NewsSource.Haaretz,

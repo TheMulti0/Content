@@ -8,7 +8,7 @@ namespace Content.Api
     {
         int MaximumItemsPerPage { get; }
         
-        Task<IEnumerable<NewsItem>> GetNews(
+        Task<IEnumerable<INewsItem>> GetNews(
             int maxResults,
             int firstPage = 0, // Zero based
             CancellationToken cancellationToken = default);

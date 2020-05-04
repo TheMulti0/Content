@@ -26,7 +26,7 @@ namespace Mako.N12Reports
 
         public int MaximumItemsPerPage { get; } = 100;
 
-        public Task<IEnumerable<NewsItem>> GetNews(
+        public Task<IEnumerable<INewsItem>> GetNews(
             int maxResults,
             int firstPage = 0,
             CancellationToken cancellationToken = default)
@@ -39,7 +39,7 @@ namespace Mako.N12Reports
                 cancellationToken);
         }
 
-        private async Task<IEnumerable<NewsItem>> GetItems(
+        private async Task<IEnumerable<INewsItem>> GetItems(
             int page,
             CancellationToken token)
         {

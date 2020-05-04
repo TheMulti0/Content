@@ -49,8 +49,8 @@ namespace Content.Services
 
         private async Task<IEnumerable<NewsItemEntity>> GetNewItems()
         {
-            IEnumerable<NewsItem> news = await GetNews();
-            IEnumerable<NewsItem> currentNews = await _database.GetAsync();
+            IEnumerable<INewsItem> news = await GetNews();
+            IEnumerable<INewsItem> currentNews = await _database.GetAsync();
 
             return news
                 .Where(item => !WasItemAdded(currentNews, item))
@@ -58,27 +58,27 @@ namespace Content.Services
         }
 
         private static bool WasItemAdded(
-            IEnumerable<NewsItem> currentNews,
-            NewsItem item)
+            IEnumerable<INewsItem> currentNews,
+            INewsItem item)
         {
             var itemInfo = new NewsItemInfo(item);
 
             return currentNews.Any(containedItem => itemInfo == new NewsItemInfo(containedItem));
         }
 
-        public async Task<IEnumerable<NewsItem>> GetNews()
+        public async Task<IEnumerable<INewsItem>> GetNews()
         {
-            IEnumerable<NewsItem> orderedItems = OrderItems(
+            IEnumerable<INewsItem> orderedItems = OrderItems(
                 await GetAllItems(_latestNewsProviders, _pagedNewsProviders));
 
             return orderedItems;
         }
 
-        private static async Task<List<NewsItem>> GetAllItems(
+        private static async Task<List<INewsItem>> GetAllItems(
             IEnumerable<ILatestNewsProvider> latestProviders,
             IEnumerable<IPagedNewsProvider> pagedProviders)
         {
-            var items = new List<NewsItem>();
+            var items = new List<INewsItem>();
 
             foreach (ILatestNewsProvider provider in latestProviders)
             {
@@ -92,7 +92,7 @@ namespace Content.Services
             return items;
         }
 
-        private static IEnumerable<NewsItem> OrderItems(IEnumerable<NewsItem> items)
+        private static IEnumerable<INewsItem> OrderItems(IEnumerable<INewsItem> items)
         {
             return items
                 .OrderByDescending(item => item.Date);
