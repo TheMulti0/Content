@@ -15,12 +15,12 @@ namespace Content.Controllers
     [Route("[controller]")]
     public class NewsController : ControllerBase
     {
-        private readonly NewsService _news;
         private readonly INewsDatabase _database;
 
-        public NewsController(NewsService news, INewsDatabase database)
+        public NewsController(
+            NewsService service, // So that the service will be created at some point
+            INewsDatabase database)
         {
-            _news = news;
             _database = database;
         }
 

@@ -36,7 +36,8 @@ namespace Content.Services
                 .Cast<NewsSource>()
                 .Except(excludedSources);
             
-            var filter = Builders<NewsItemEntity>.Filter.In(item => item.Source, includedSources);
+            var filter = Builders<NewsItemEntity>.Filter
+                .In(item => item.Source, includedSources);
             
             IAsyncCursor<NewsItemEntity> cursor = await _items
                 .FindAsync(

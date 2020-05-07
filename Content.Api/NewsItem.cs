@@ -6,21 +6,21 @@ namespace Content.Api
 {
     public sealed class NewsItem : INewsItem
     {
-        public NewsSource Source { get; set; }
+        public NewsSource Source { get; }
         
-        public string Title { get; set; }
+        public string Title { get; }
 
-        public string Description { get; set; }
+        public string Description { get; }
         
-        public Author Author { get; set; }
+        public Author Author { get; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; }
 
-        public string Url { get; set; }
+        public string Url { get; }
 
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; }
 
-        public string VideoUrl { get; set; }
+        public string VideoUrl { get; }
 
         public NewsItem(
             NewsSource source,

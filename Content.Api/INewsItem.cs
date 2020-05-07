@@ -4,20 +4,20 @@ namespace Content.Api
 {
     public interface INewsItem
     {
-        NewsSource Source { get; set; }
+        NewsSource Source { get; }
         
-        string Title { get; set; }
+        string Title { get; }
 
-        string Description { get; set; }
+        string Description { get; }
         
-        Author Author { get; set; }
+        Author Author { get; }
 
-        DateTime Date { get; set; }
+        DateTime Date { get; }
 
-        string Url { get; set; }
+        string Url { get; }
 
-        string ImageUrl { get; set; }
+        string ImageUrl { get; }
 
-        string VideoUrl { get; set; }
+        string VideoUrl { get; }
     }
 }
