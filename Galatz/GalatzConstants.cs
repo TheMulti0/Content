@@ -1,6 +1,6 @@
-﻿namespace Galatz.News
+﻿namespace Galatz
 {
-    public static class GalatzConstants
+    internal static class GalatzConstants
     {
         private const string BaseAddress = "https://glz.co.il";
 

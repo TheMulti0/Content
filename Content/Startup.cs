@@ -7,6 +7,7 @@ using Content.Services;
 using Galatz.News;
 using Haaretz.News;
 using Kan.News;
+using Kan.Reports;
 using Mako.N12Reports;
 using Mako.News;
 using Microsoft.AspNetCore.Builder;
@@ -95,6 +96,7 @@ namespace Content
             services.AddSingleton<ILatestNewsProvider, TheMarkerProvider>();
             services.AddSingleton<ILatestNewsProvider, N0404Provider>();
             services.AddSingleton<ILatestNewsProvider, GalatzProvider>();
+            services.AddSingleton<ILatestNewsProvider, KanReportsProvider>();
         }
 
         private static void RegisterPagedProviders(IServiceCollection services)
