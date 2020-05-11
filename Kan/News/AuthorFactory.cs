@@ -13,7 +13,7 @@ namespace Kan.News
             
             return new Author(
                 name,
-                "https://www.kan.org.il/images/ic_add_black_1.svg");
+                KanConstants.IconAddress);
         }
     }
 }

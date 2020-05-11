@@ -8,6 +8,7 @@
         GalatzReports,
         Haaretz,
         Kan,
+        KanReports,
         Mako,
         MakoReporters,
         N0404,
