@@ -39,11 +39,11 @@ namespace Content.Services
         {
             while (true)
             {
-                await Task.Delay(TimeSpan.FromSeconds(_settings.NewsUpdateSecondsInterval));
-
                 IEnumerable<NewsItemEntity> newItems = await GetNewItems();
 
                 await _database.AddRangeAsync(newItems);
+
+                await Task.Delay(TimeSpan.FromSeconds(_settings.NewsUpdateSecondsInterval));
             }
         }
 
@@ -82,12 +82,26 @@ namespace Content.Services
 
             foreach (ILatestNewsProvider provider in latestProviders)
             {
-                items.AddRange(await provider.GetNews());
+                try
+                {
+                    items.AddRange(await provider.GetNews());
+                }
+                catch
+                {
+                    // ignored
+                }
             }
             foreach (IPagedNewsProvider provider in pagedProviders)
             {
-                items.AddRange(
-                    await provider.GetNews(provider.MaximumItemsPerPage));
+                try
+                {
+                    items.AddRange(
+                        await provider.GetNews(provider.MaximumItemsPerPage));
+                }
+                catch
+                {
+                    // ignored
+                }
             }
             return items;
         }
