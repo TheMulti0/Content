@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="System.Text.Json" Version="4.7.1" />
+      <PackageReference Include="TheMulti0.TwitterScraper" Version="1.0.4" />
     </ItemGroup>
 
     <ItemGroup>
