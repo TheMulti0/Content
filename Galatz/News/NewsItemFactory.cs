@@ -8,7 +8,7 @@ namespace Galatz.News
 {
     public static class NewsItemFactory
     {
-        private const string TimePattern = "[0-9]{4}";
+        private static readonly Regex TimeRegex = new Regex("[0-9]{4}", RegexOptions.RightToLeft);
         
         public static INewsItem Create(Hashtag hashtag, Seo seo)
         {
@@ -27,7 +27,7 @@ namespace Galatz.News
 
         private static string GetFullDate(Hashtag hashtag)
         {
-            string time = Regex.Match(hashtag.Url, TimePattern, RegexOptions.RightToLeft).Groups.FirstOrDefault()?.Value;
+            string time = TimeRegex.Match(hashtag.Url).Groups.FirstOrDefault()?.Value;
             
             string formattedTime = time?.Insert(2, ":"); // Add hour:second seperator
 

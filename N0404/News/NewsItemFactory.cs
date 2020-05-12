@@ -9,11 +9,11 @@ namespace N0404.News
 {
     public static class NewsItemFactory
     {
-        private const string ContentPattern = "<p>(.*)<\\/p><a";
+        private static readonly Regex ContentRegex = new Regex("<p>(.*)<\\/p><a", RegexOptions.Singleline);
         
         public static INewsItem Create(N0404RssItem rssItem)
         {
-            string description = Regex.Match(rssItem.Encoded, ContentPattern, RegexOptions.Singleline).Groups.LastOrDefault()?.Value;
+            string description = ContentRegex.Match(rssItem.Encoded).Groups.LastOrDefault()?.Value;
             
             return new NewsItem(
                 NewsSource.N0404,

@@ -8,11 +8,11 @@ namespace Walla.Reports
 {
     public static class NewsItemFactory
     {
-        private const string ContentPattern = "<br\\/>(.*)<\\/p";
+        private static readonly Regex ContentRegex = new Regex("<br\\/>(.*)<\\/p");
         
         public static INewsItem Create(WallaRssItem rssItem)
         {
-            string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
+            string description = ContentRegex.Match(rssItem.Description).Groups.LastOrDefault()?.Value;
             
             return new NewsItem(
                 NewsSource.WallaReports,

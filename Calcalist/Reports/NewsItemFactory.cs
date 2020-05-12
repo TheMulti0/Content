@@ -8,13 +8,13 @@ namespace Calcalist.Reports
 {
     public static class NewsItemFactory
     {
-        private const string ContentPattern = "<\\/div>(.*)";
-        private const string ImagePattern = "<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")";
+        private static readonly Regex ContentRegex = new Regex("<\\/div>(.*)");
+        private static readonly Regex ImageRegex = new Regex("<img\\s.*?src=(?:'|\")([^'\">]+)(?:'|\")");
         
         public static INewsItem Create(CalcalistRssItem rssItem)
         {
-            string description = Regex.Match(rssItem.Description, ContentPattern).Groups.LastOrDefault()?.Value;
-            string imageUrl = Regex.Match(rssItem.Description, ImagePattern).Groups.LastOrDefault()?.Value;
+            string description = ContentRegex.Match(rssItem.Description).Groups.LastOrDefault()?.Value;
+            string imageUrl = ImageRegex.Match(rssItem.Description).Groups.LastOrDefault()?.Value;
             if (imageUrl == "")
             {
                 imageUrl = null;
