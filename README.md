@@ -31,3 +31,21 @@ NewsSources:
  - [x] WallaReports
  - [x] Ynet
  - [x] YnetReports
+ - [ ] Channel20
+ - [ ] Channel20Reports
+ - [ ] Globes
+ - [ ] MSNIsrael
+ - [ ] KikarHashabat
+ - [ ] bhol.co.il
+ - [ ] IsraelHayom
+ - [ ] IsraelHayomReports
+ - [ ] News1
+ - [ ] Maariv
+ - [ ] MaarivReports
+ - [ ] Channel7
+ - [ ] Channel7Reports
+ - [ ] Srugim
+ - [ ] TheJerusalemPost
+ - [ ] 103fm
+ - [ ] KnessetChannel
+ - [ ] KnessetChannelReports
