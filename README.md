@@ -8,7 +8,7 @@ Content periodically polls all of the newssources and pushes the new newsitems i
 
 A REST API is avaliable to query from the database.
 
-Content also has a simple React client!
+[Content also has a simple React client!](https://github.com/TheMulti0/content-client)
 
 ### Current implementation:
 Database:
