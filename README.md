@@ -46,6 +46,8 @@ NewsSources:
  - [ ] Channel7Reports
  - [ ] Srugim
  - [ ] TheJerusalemPost
+ - [ ] Kol Barama
  - [ ] 103fm
+ - [ ] 104.5fm
  - [ ] KnessetChannel
  - [ ] KnessetChannelReports
