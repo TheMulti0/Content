@@ -49,5 +49,6 @@ NewsSources:
  - [ ] Kol Barama
  - [ ] 103fm
  - [ ] 104.5fm
+ - [ ] GaleyIsrael
  - [ ] KnessetChannel
  - [ ] KnessetChannelReports
